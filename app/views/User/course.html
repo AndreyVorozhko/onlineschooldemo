@@ -1,0 +1,80 @@
+{{>head}}
+
+</head>
+
+<body>
+    
+{{>header}}
+  {{>sidebar}}
+
+	{{>second-header}}
+	
+	<div class="wrapper">
+	
+		{{>breadcrumbs}}
+		
+		<div id="mob-title" class="block">
+			<h4>{{meta.name}}</h4>
+		</div>
+		
+		<div class="lessons-wrap block-group">
+			<div id="course-desc" class="block"><div class="paper">
+				{{#meta}}
+				<img src="/upl/projects/{{pid}}/{{img}}" alt="">
+				<progress max="100" value="{{percent}}"></progress>
+				<span>Прогресс: {{lessons_passed}} / {{lessons_total}} ({{percent}}%)</span>
+                {{#finished}}
+                <div class="deadline">Дедлайн остановлен :)</div>
+                {{/finished}}
+                {{^finished}}
+                {{^nodeadline}}
+                <div class="deadline">Дедлайн через:</div>
+				<div class="cid_{{id}} styled"></div>
+                {{/nodeadline}}
+                {{/finished}}
+				{{/meta}}
+			</div></div>
+			<div id="lessons-list" class="block">
+				<div class="paper block-group">
+					<h5>Список уроков:</h5>
+					{{#lessons}}
+						<div class="lesson {{^avail}}unavailable {{/avail}}block">
+						{{#avail}}<a class="lesson-link" href="cid/{{cid}}/lid/{{id}}"><span class="{{passed}}"><span>{{position}}</span></span> <span>{{name}}</span></a>
+						{{/avail}}
+						{{^avail}}
+						<span class="{{passed}}"><span>{{position}}</span></span> <span>{{name}}</span>
+						{{/avail}}
+						</div>
+					{{/lessons}}
+					<!--
+					<div class="lesson block">
+						<a class="lesson-link" href="cid/1/lid/1"><span class="passed"><span>1</span></span> <span>Введение</span></a>
+					</div>
+					<div class="lesson block">
+						<a class="lesson-link" href="lesson.html"><span class="passed"><span>2</span></span> <span>Знакомство с командой</span></a>
+					</div>
+					<div class="lesson block">
+						<a class="lesson-link" href="lesson.html"><span class="unpassed"><span>3</span></span> <span>Favicon зачем он нужен сайту и как его сделать</span></a>
+					</div>
+					<div class="lesson unavailable block">
+						<span class="unpassed"><span>4</span></span> <span>Логотип для сайта</span>
+					</div>
+					-->
+				</div>
+			</div>
+		</div>
+	
+	</div>
+
+  {{>footer}}
+  
+  <script>
+	$('.cid_{{meta.id}}.styled').countdown({
+	  date: new Date({{meta.deadline}} * 1000),
+	  render: function(data) {
+		$(this.el).html("<div>" + this.leadingZeros(data.years, 1) + " <span>лет</span></div><div>" + this.leadingZeros(data.days, 1) + " <span>дней</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>часов</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>минут</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>секунд</span></div>");
+	  }
+	});
+  </script>
+
+{{>ending}}

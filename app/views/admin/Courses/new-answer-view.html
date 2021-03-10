@@ -1,0 +1,197 @@
+{{>head}}
+{{>header}}
+
+  {{>sidebar}}
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Просмотр новых ответов к уроку</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+		
+        <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Все новые ответы</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+			  
+			  <div id="accordion" role="tablist" aria-multiselectable="true">
+				  <div class="card">
+					<div class="card-header bg-dark" role="tab" id="headingOne">
+					  <h5 class="mb-0">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						  Контент урока № {{lesson.position}} "{{lesson.name}}" (Курс: {{lesson.project}})
+						</a>
+					  </h5>
+					</div>
+
+					<div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+					  <div class="card-block p-3">
+						{{{lesson.content}}}
+					  </div>
+					</div>
+				  </div>
+				</div>
+                
+				<div class="block mb-3">
+					{{#lesson.stop}}<span class="badge badge-pill badge-danger font-weight-light">stop-урок</span>{{/lesson.stop}}
+					{{#lesson.bonus}}<span class="badge badge-pill badge-success font-weight-light">бонусный урок</span>{{/lesson.bonus}}
+				</div>
+
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">Комментарии и ответы</h4>
+					</div>
+					<div class="comment-widgets">
+					{{#lesson.answers}}
+						<!-- Comment Row -->
+						<div class="d-flex flex-row comment-row mb-3 pr-3">
+						<a name="aid{{id}}"></a>
+							<div class="p-2"><img src="/upl/users/{{uid}}/ava.jpg" alt="user" width="50" class="rounded-circle"></div>
+							<div class="comment-text w-100 p-3">
+								<span class="font-weight-light">{{uname}} {{usurname}}</span>
+								<span class="text-muted ml-3 font-weight-light">{{date}}</span>
+								{{#new}}{{^admin}}<span class="badge badge-pill badge-danger ml-3 font-weight-light">new</span>{{/admin}}{{/new}}
+								{{#accepted}}<span class="badge badge-success ml-3 font-weight-light"><i class="far fa-check-square"></i> accepted</span>{{/accepted}}
+								<a href="courses/delete-answer/{{id}}" class="mr-2 float-right" data-toggle="modal" data-target="#delconfirm" data-username="№{{id}} пользователя {{uname}} {{usurname}}"><i class="far fa-trash-alt"></i></a>
+								{{^accepted}}{{#lesson.stop}}{{^admin}}<a href="courses/accept-answer/{{id}}" class="mr-2 float-right" data-toggle="modal" data-target="#acceptconfirm" data-username="№{{id}} пользователя {{uname}} {{usurname}}"><i class="far fa-check-square"></i></a>{{/admin}}{{/lesson.stop}}{{/accepted}}
+								<span class="mb-2 mt-3 d-block">{{{content}}}</span>
+								<div class="comment-footer">
+									
+								</div>
+							</div>
+						</div> <!-- Comment Row -->
+					{{/lesson.answers}}
+					</div> <!-- Card -->
+					<form action="courses/add-answer" method="post">
+						<input type="hidden" name="lid" value="{{lid}}">
+						<input type="hidden" name="uid" value="{{uid}}">
+						<div class="trumbowyg-dark">
+							<textarea id="textarea" name="answer" placeholder="Введите ваш ответ / комментарий к уроку"></textarea>
+						</div>
+						<p>
+							<input class="btn btn-info float-right m-3" type="submit" value="Отправить">
+						</p>
+					</form>
+				</div>
+
+            </div>
+              <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+	  <!-- /.container-fluid -->
+	  
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- /.wrapper -->
+
+  {{>control-sidebar}}
+  
+	<!-- Modal -->
+	<div class="modal fade" id="delconfirm">
+      <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:#000">Внимание!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>Удалить ответ:<br>"<span id="username"></span>"?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a id="yesdel" type="button" class="btn btn-outline-dark">Да</a>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Нет</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+	
+	<!-- Modal -->
+	<div class="modal fade" id="acceptconfirm">
+      <div class="modal-dialog">
+        <div class="modal-content bg-info">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:#000">Внимание!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>Принять ответ:<br>"<span id="username"></span>"?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a id="yesdel" type="button" class="btn btn-outline-dark">Да</a>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Нет</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+{{>footer}}
+
+<script src="/assets/trumbowyg/trumbowyg.min.js"></script>
+<script type="text/javascript" src="/assets/trumbowyg/langs/ru.min.js"></script>
+
+<script>
+	$('#textarea').trumbowyg({
+		lang: 'ru',
+		autogrow: true,
+		btns: [
+			['viewHTML'],
+			['undo', 'redo'], // Only supported in Blink browsers
+			['formatting'],
+			['strong', 'em', 'underline', 'del'],
+			['link'],
+			['insertImage'],
+			['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+			['unorderedList', 'orderedList'],
+			['horizontalRule'],
+			['removeformat'],
+			['fullscreen']
+		]
+	});
+</script>
+
+<script>
+	$('#delconfirm').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var username = button.data('username') // Extract info from data-* attributes
+	  var link = button.attr('href');
+	  
+	  var modal = $(this);
+	  modal.find('#username').text(username);
+	  modal.find('#yesdel').attr('href', link);
+	})
+	$('#acceptconfirm').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var username = button.data('username') // Extract info from data-* attributes
+	  var link = button.attr('href');
+	  
+	  var modal = $(this);
+	  modal.find('#username').text(username);
+	  modal.find('#yesdel').attr('href', link);
+	})
+</script>
+{{>ending}}

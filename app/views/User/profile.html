@@ -1,0 +1,198 @@
+{{>head}}
+<link rel="stylesheet" href="/assets/croppie/croppie.min.css">
+
+</head>
+
+<body>
+    
+{{>header}}
+  {{>sidebar}}
+
+	{{>second-header}}
+	
+	<div class="wrapper">
+	
+		{{>breadcrumbs}}
+		
+		<div id="mob-title" class="block">
+			<h4>Ваш профиль</h4>
+		</div>
+		
+		<div class="lesson-wrap">
+			<form action="/user/save-profile" method="POST" enctype="multipart/form-data">
+			{{#user_fields}}
+				<p>Текущий аватар:<br>
+				{{#ava}}<img src="/upl/users/{{id}}/ava.jpg" alt="Аватарка">{{/ava}}{{^ava}}Нет{{/ava}}
+				</p>
+				<p>Загрузить новый аватар:<br>
+				<input type="file" class="inputfile" id="pimg" name="ava">
+				<button type="button" id="file_reset" class="button">Удалить изображение</button>
+				  <div id="preview">
+					<p>Выберите область для вашего аватара:</p>
+				  </div>
+				  <input id="for-image" type="hidden" name="myhidden" value="">
+				</p>
+				<!--
+				<label class="img-upload-label">
+					Upload Image:
+					<input type="file" class="js-fileinput img-upload" accept="image/jpeg,image/png,image/gif">
+				</label>
+				<button class="js-export img-export">Export</button>
+				<canvas class="js-editorcanvas"></canvas>
+				<canvas class="js-previewcanvas"></canvas>
+				-->
+				<p>Идентификатор:<br><input type="text" name="id" value="{{id}}" readonly></p>
+				<p>Имя (если хотите, и отчество :):<br><input type="text" name="name" value="{{name}}"></p>
+				<p>Фамилия:<br><input type="text" name="surname" value="{{surname}}"></p>
+				<p>Электронная почта:<br><input type="text" name="email" value="{{email}}"></p>
+				<p>Телефон:<br><input type="text" name="tel" value="{{tel}}"></p>
+				<p>WhatsApp подключен: <input type="checkbox" name="whats" value="1" {{#whats}}checked{{/whats}}></p>
+				<p>Viber подключен: <input type="checkbox" name="viber" value="1" {{#viber}}checked{{/viber}}></p>
+				<p>Telegram подключен: <input type="checkbox" name="teleg" value="1" {{#teleg}}checked{{/teleg}}></p>
+				<p>Расскажите о себе. Для более плодотворного сотрудничества ответьте, пожалуйста, на эти вопросы:</p>
+                <p>
+                    <ol>
+                        <li>Какие самые главные ваши вопросы вы хотели решить с помощью курса?</li>
+                        <li>Каким вы видите их идеальное решение?</li>
+                        <li>Проходили ли вы обучение продажам или заказывали сайт где-то ещё или пробовали ли вы решить свои вопросы своими силами? Что сработало, а что нет?</li>
+                        <li>Что вы теряете пока у вас нет хорошего продающего сайта?</li>
+                        <li>Насколько вам нужны знания о продажах и продающий сайт прямо сейчас?</li>
+                        <li>Как вы пришли к тому что вам подойдет именно наши услуги?</li>
+                    </ol>
+                </p>
+				<div class="trumbowyg-dark">
+					<textarea id="textarea" name="about">{{{about}}}</textarea>
+				</div>
+				<p>Активирован: <input type="checkbox" name="activated" value="1" {{#activated}}checked{{/activated}} disabled></p>
+				<p>Забанен: <input type="checkbox" name="banned" value="1" {{#banned}}checked{{/banned}} disabled></p>
+				
+				<p>Новый пароль:<br>
+				<input type="password" name="newpass" value="">
+				</p>
+				
+				<p>Повтор нового пароля:<br>
+				<input type="password" name="newpass2" value="">
+				</p>
+				
+				<h3>Дедлайны к курсам</h3>
+				{{#deadlines}}
+					<p>Дедлайн к курсу <a href="/user/area/cid/{{cid}}">"{{cname}}"</a>:<br>
+					<input type="date" name="id{{cid}}" value="{{deadline}}" {{#deadline}}disabled{{/deadline}}>
+					</p>
+				{{/deadlines}}
+				<p>Чтобы сохранить изменения введите текущий пароль:<br>
+				<input type="password" name="curpass" value="">
+				</p>
+				<p><input type="submit" name="smb" value="Сохранить"></p>
+			{{/user_fields}}
+			</form>
+		</div>
+	
+	</div>
+
+  {{>footer}}
+	<script src="/assets/trumbowyg/trumbowyg.js"></script>
+	<script type="text/javascript" src="/assets/trumbowyg/langs/ru.min.js"></script>
+	<!-- Import Trumbowyg plugins... -->
+	<script src="/assets/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+	<script src="/assets/trumbowyg/plugins/pasteembed/trumbowyg.pasteembed.js"></script>
+
+	<script>
+		$('#textarea').trumbowyg({
+			lang: 'ru',
+			autogrow: true
+		});
+	</script>
+	
+	<script src="/assets/croppie/croppie.min.js"></script>
+
+	<script>
+
+	// New file upload form
+
+	$('#file_reset').hide();
+
+	var el = document.getElementById('preview');
+	var elj = $(el);
+
+	var vanilla = new Croppie(el, {
+		viewport: { width: 240, height: 240, type: 'circle' },
+		boundary: { width: 400, height: 400 },
+		showZoomer: false,
+		enableOrientation: false
+	});
+
+	elj.hide();
+
+	function crop(imgblob){
+		
+		elj.show();
+		
+		vanilla.bind({
+			url: imgblob
+		});
+		
+		document.getElementById('file_reset').addEventListener('click', function(){
+			document.getElementById('pimg').value = '';
+			elj.hide();
+			$('#file_reset').hide();
+			//vanilla.destroy();
+		});
+		
+		el.addEventListener('update', function(ev) {
+			vanilla.result({type: 'base64', size: 'viewport', format: 'jpeg', quality: 1, circle: false}).then(function(b64) {
+			// do something with cropped blob
+			//console.log(b64);
+			document.getElementById('for-image').value = b64;
+			});
+		});
+
+	}
+
+	;( function ( document, window, index )
+	{
+		var inputs = document.querySelectorAll( '.inputfile' );
+		Array.prototype.forEach.call( inputs, function( input )
+		{
+			var label    = input.nextElementSibling,
+				labelVal = label.innerHTML;
+
+			input.addEventListener( 'change', function( e )
+			{
+				var fileName = '';
+				if( this.files && this.files.length > 1 )
+					fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+				else
+					fileName = e.target.value.split( '\\' ).pop();
+				/*
+				if( fileName )
+					label.querySelector( 'span' ).innerHTML = fileName;
+				else
+					label.innerHTML = labelVal;
+				*/
+				// Show picture before upload
+				//var previ = event.target.nextElementSibling.nextElementSibling;
+				var imgblob = URL.createObjectURL(event.target.files[0]);
+				/*
+				var newimg = document.createElement("img");
+				newimg.src = URL.createObjectURL(event.target.files[0]);
+				newimg.classList.add("preupl");
+				
+				// Remove all children from preview element
+				previ.innerHTML = '';			
+				previ.appendChild(newimg);
+				*/
+				$('#file_reset').show();
+				
+				crop(imgblob);
+			});
+
+			// Firefox bug fix
+			input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+			input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+		});
+	}( document, window, 0 ));
+
+	</script>
+
+{{>ending}}

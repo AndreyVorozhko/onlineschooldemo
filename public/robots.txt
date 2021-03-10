@@ -1,0 +1,33 @@
+User-agent: *
+Disallow: /user*
+Disallow: /cert*
+Disallow: /feedback*
+Disallow: /comment*
+Disallow: /app*
+Crawl-delay: 10
+Sitemap: https://someproject.ru/sitemap_index.xml
+
+User-agent: Yandex
+Disallow: /user*
+Disallow: /cert*
+Disallow: /feedback*
+Disallow: /comment*
+Disallow: /app*
+Crawl-delay: 10
+Sitemap: https://someproject.ru/sitemap_index.xml
+
+User-agent: Googlebot
+Disallow: /user*
+Disallow: /cert*
+Disallow: /feedback*
+Disallow: /comment*
+Disallow: /app*
+Crawl-delay: 10
+
+User-agent: Googlebot-Image
+Allow: /upl/*
+Allow: /img/*
+
+User-agent: YandexImages
+Allow: /upl/*
+Allow: /img/*

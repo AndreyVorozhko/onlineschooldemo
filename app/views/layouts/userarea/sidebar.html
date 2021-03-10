@@ -1,0 +1,72 @@
+	<div class="open">
+		<button class="hamburger" type="button">
+			{{#events}}<span class="hamburger-new">{{count}}</span>{{/events}}
+			<span class="hamburger__box">
+				<span class="hamburger__inner"></span>
+			</span>
+		</button>
+	</div>
+
+	<menu class="menu__panel" id="menu">
+		<div class="top">
+			<div class="head">Личный кабинет</div>
+			<div class="close__side">
+				<div class="close">
+					<svg class="slide-down"><use xlink:href="/assets/userarea/sprite.svg#angle-double-left"></use></svg>
+				</div>
+			</div>
+		</div>
+		<div class="person">
+			<div class="avatar">
+				<img src="{{user-ava}}" alt="User">
+			</div>
+			<div class="name">{{user-name}} {{user-surname}}</div>
+		</div>
+		<div class="menu__docs">
+			<ul class="docs__list">
+				<li class="docs__item">
+					<a href="" class="docs__link">
+						<svg class="menu__icon active-icon"><use xlink:href="/assets/userarea/sprite.svg#graduation-cap"></use></svg>
+						Курсы
+					</a>
+				</li>
+				<li class="docs__item">
+					<a href="/user/area/new" class="docs__link">
+						<svg class="menu__icon"><use xlink:href="/assets/userarea/sprite.svg#scroll"></use></svg>
+						{{#events}}<span class="something-new">{{count}}</span>{{/events}}
+						Уроки
+					</a>
+				</li>
+				<li class="docs__item">
+					<a href="profile/view" class="docs__link">
+						<svg class="menu__icon"><use xlink:href="/assets/userarea/sprite.svg#profile"></use></svg>
+						Профиль
+					</a>
+				</li>
+				<li class="docs__item">
+					<a href="https://github.com/hexagonhq/Sideout#api" class="docs__link">
+						<svg class="menu__icon"><use xlink:href="/assets/userarea/sprite.svg#repo"></use></svg>
+						Репозиторий
+					</a>
+				</li>
+				<li class="docs__item">
+					<a href="https://github.com/hexagonhq/Sideout#api" class="docs__link">
+						<svg class="menu__icon"><use xlink:href="/assets/userarea/sprite.svg#support"></use></svg>
+						Техподдержка
+					</a>
+				</li>
+				<li class="docs__item">
+					<a href="https://github.com/hexagonhq/Sideout#api" class="docs__link">
+						<svg class="menu__icon"><use xlink:href="/assets/userarea/sprite.svg#help"></use></svg>
+						Помощь
+					</a>
+				</li>
+				<li class="docs__item">
+					<a href="/user/logout" class="docs__link">
+						<svg class="menu__icon"><use xlink:href="/assets/userarea/sprite.svg#exit"></use></svg>
+						Выход
+					</a>
+				</li>
+			</ul>
+		</div>
+	</menu>

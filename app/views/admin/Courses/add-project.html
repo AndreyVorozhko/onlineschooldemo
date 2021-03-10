@@ -1,0 +1,108 @@
+{{>head}}
+  <!-- Croppie -->
+  <link rel="stylesheet" href="croppie/croppie.min.css">
+{{>header}}
+
+  {{>sidebar}}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Добавить новый проект курса</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+		<div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Создать новый курс (проект)</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+		    <div class="card-body">
+				<div class="form-group row">
+					<label for="iimg" class="col-sm-2 col-form-label">Изображение проекта</label>
+					<div class="col-sm-10">
+					  <input type="file" class="form-control" id="iimg" name="img">
+					</div>
+				 </div>
+            </div>
+            <div class="card-body">
+				<div class="form-group row">
+					<label for="iname" class="col-sm-2 col-form-label">Название проекта</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="iname" name="name" placeholder="Название проекта">
+					</div>
+				 </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-info" name="submit" value="Создать новый проект">Создать</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {{>control-sidebar}}
+
+{{>footer}}
+<script src="trumbowyg/trumbowyg.js"></script>
+<script type="text/javascript" src="trumbowyg/langs/ru.min.js"></script>
+<!-- Import Trumbowyg plugins... -->
+<script src="trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="trumbowyg/plugins/pasteembed/trumbowyg.pasteembed.js"></script>
+<script src="croppie/croppie.min.js"></script>
+
+<script>
+
+$('#editor').trumbowyg({
+	lang: 'ru',
+	autogrow: true,
+	btnsDef: {
+		// Create a new dropdown
+		image: {
+			dropdown: ['upload'],
+			ico: 'insertImage'
+		}
+	},
+	// Redefine the button panel
+	btns: [
+		['viewHTML'],
+		['formatting'],
+		['strong', 'em', 'underline', 'del'],
+		['superscript', 'subscript'],
+		['link'],
+		['image'], // Our fresh created dropdown
+		['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+		['unorderedList', 'orderedList'],
+		['horizontalRule'],
+		['removeformat'],
+		['fullscreen']
+	],
+	plugins: {
+		upload: {
+			serverPath: '{{index}}{{adminname}}/articles/upload',
+			fileFieldName: 'image',
+			urlPropertyName: 'url'
+		}
+	}
+});
+
+</script>
+
+{{>ending}}

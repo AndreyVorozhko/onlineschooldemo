@@ -1,0 +1,42 @@
+			<aside id="sidebar" class="block">
+				<div class="bar">
+					<p>Личный кабинет:</p>
+					{{#if_signed}} {{! if authorized }}
+						{{#if_admin}}
+							<p><a href="{{index}}{{adminname}}">Админпанель</a></p>
+							<p><a href="user/area">Кабинет</a></p>
+							<p><a href="user/logout">Выход</a></p>
+						{{/if_admin}}
+						{{^if_admin}}
+							<p><a href="user/area">Перейти</a></p>
+							<p><a href="user/logout">Выход</a></p>
+						{{/if_admin}}
+					{{/if_signed}}
+					{{^if_signed}} {{! if NOT authorized }}
+					<form id="sidelog" action="user/login" method="post">
+						<p>
+							<input type="text" name="login" placeholder="Email или телефон" required>
+						</p>
+						<p>
+							<input type="password" name="pass" placeholder="Пароль" required>
+						</p>
+						{{>captcha}}
+							<input type="text" class="hide" name="captcha" placeholder="Введите текст с картинки">
+							<input type="text" class="hide" name="addr" placeholder="Введите ваш адрес">
+						<p>
+							<input class="pale_but" type="submit" name="sub" value="Войти">
+						</p>
+					</form>
+					{{/if_signed}}
+				</div>
+				<div class="bar">
+					<p>Наши курсы</p>
+					<p><a href="{{index}}">Наш курс</a></p>
+				</div>
+				<div class="bar">
+					<p>Мы в ВК</p>
+				</div>
+				<div class="bar">
+					<p>Наш Инстаграм</p>
+				</div>
+			</aside>

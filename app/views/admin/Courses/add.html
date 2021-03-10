@@ -1,0 +1,106 @@
+{{>head}}
+
+{{>header}}
+
+  {{>sidebar}}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Создать новую версию курса</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+		<div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Создать новую версию курса</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+            <div class="card-body">
+			  <div class="form-group row">
+                <label for="iname" class="col-sm-2 col-form-label">Имя проекта</label>
+                <div class="col-sm-10">
+                  <select id="iname" name="project" class="form-control">
+				  {{#project_list}}
+                    <option value="{{pid}}">{{pname}}</option>
+				  {{/project_list}}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="istatus" class="col-sm-2 col-form-label">Статус версии</label>
+                <div class="col-sm-10">
+                  <select id="iname" name="status" class="form-control">
+				  {{#status_list}}
+                    <option value="{{sid}}">{{sname}}</option>
+				  {{/status_list}}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="ivers" class="col-sm-2 col-form-label">Номер версии</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="ivers" name="version" placeholder="Номер этой версии курса">
+                </div>
+              </div>
+			  <div class="form-group row">
+                <label for="inotes" class="col-sm-2 col-form-label">Приватные админские заметки</label>
+                <div class="col-sm-10">
+					<div class="trumbowyg-dark">
+						<textarea id="inotes" class="editor" name="notes"></textarea>
+					</div>
+                </div>
+              </div>
+			  <div class="form-group row">
+                <label for="ichanges" class="col-sm-2 col-form-label">Публичный отчет об изменениях</label>
+                <div class="col-sm-10">
+					<div class="trumbowyg-dark">
+						<textarea id="ichanges" class="editor" name="changes"></textarea>
+					</div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-info" name="submit" value="Добавить версию курса">Создать</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {{>control-sidebar}}
+
+{{>footer}}
+<script src="/assets/trumbowyg/trumbowyg.js"></script>
+<script type="text/javascript" src="/assets/trumbowyg/langs/ru.min.js"></script>
+<!-- Import Trumbowyg plugins... -->
+<script src="/assets/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="/assets/trumbowyg/plugins/pasteembed/trumbowyg.pasteembed.js"></script>
+
+<script>
+
+$('.editor').trumbowyg({
+	lang: 'ru',
+	autogrow: true
+});
+
+</script>
+
+{{>ending}}

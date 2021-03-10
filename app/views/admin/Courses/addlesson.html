@@ -1,0 +1,135 @@
+{{>head}}
+
+{{>header}}
+
+  {{>sidebar}}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Добавить новый урок для курса "{{cname}}"</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+		<div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Форма добавления нового урока</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+            <div class="card-body">
+				<div class="form-group row">
+					<label for="inputPosition" class="col-sm-2 col-form-label">Номер урока</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="inputPosition" name="position" value="{{nextpos}}">
+					</div>
+				 </div>
+				 <div class="form-group row">
+					<label for="selectPos" class="col-sm-2 col-form-label">Куда вставить?</label>
+					<div class="col-sm-10">
+						  <div class="form-group">
+							<div class="form-check">
+							  <input class="form-check-input" type="radio" name="beaf" value="pos" checked="">
+							  <label class="form-check-label">Использовать номер урока</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="radio" name="beaf" value="before">
+							  <label class="form-check-label">Перед</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="radio" name="beaf" value="after">
+							  <label class="form-check-label">После</label>
+							</div>
+						  </div>
+						  <select class="form-control select2" id="selectPos" name="insert">
+						  {{#lesson_list}}
+							<option selected disabled hidden style='display: none' value=''></option>
+							<option value="{{pos}}">№{{pos}}. {{name}}</option>
+						  {{/lesson_list}}
+						  </select>
+					</div>                  
+                 </div>
+				 <div class="form-group row">
+					<label for="inputTitle" class="col-sm-2 col-form-label">Название урока</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="inputTitle" name="name" placeholder="Название урока">
+					</div>
+				 </div>
+				<div class="form-group row">
+					<div class="col-sm-2"></div>
+					<div class="custom-control custom-switch col-sm-10">
+                      <input type="checkbox" class="custom-control-input" name="stop" id="stoplesson" value="on">
+                      <label class="custom-control-label" for="stoplesson">Стоп-урок?</label>
+                    </div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-2"></div>
+					<div class="custom-control custom-switch col-sm-10">
+                      <input type="checkbox" class="custom-control-input" name="bonus" id="bonuslesson" value="on">
+                      <label class="custom-control-label" for="bonuslesson">Бонусный урок? (просто для выделения)</label>
+                    </div>
+				</div>
+				<div class="form-group row">
+                        <label class="col-sm-2">Тарифы</label>
+						<div class="col-sm-10">
+							<select name="rate[]" multiple="" class="form-control">
+							  <option selected value="all">Все</option>
+							{{#rate_list}}
+								<option value="{{rid}}">{{rname}}</option>
+							{{/rate_list}}
+							</select>
+						</div>
+                </div>
+				<div class="form-group row">
+					<label for="editor" class="col-sm-2 col-form-label">Контент урока</label>
+					<div class="col-sm-10">
+						<div class="trumbowyg-dark">
+							<textarea class="editor" name="content">Контент урока</textarea>
+						</div>
+					</div>
+				</div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-info" name="submit" value="Добавить статью">Добавить</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {{>control-sidebar}}
+
+{{>footer}}
+<script src="/assets/trumbowyg/trumbowyg.js"></script>
+<script type="text/javascript" src="/assets/trumbowyg/langs/ru.min.js"></script>
+<!-- Import Trumbowyg plugins... -->
+<script src="/assets/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="/assets/trumbowyg/plugins/pasteembed/trumbowyg.pasteembed.js"></script>
+<script src="/assets/croppie/croppie.min.js"></script>
+
+<script>
+
+$('.editor').trumbowyg({
+	lang: 'ru',
+	autogrow: true
+});
+
+</script>
+
+{{>ending}}

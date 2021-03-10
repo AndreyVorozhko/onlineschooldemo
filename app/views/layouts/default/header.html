@@ -1,0 +1,107 @@
+</head>
+<body class="block-group">
+	<header class="block block-group">
+		<div id="logo" class="block">
+			{{#if_index}}
+				<svg class="logo"><use xlink:href="img/sprite.svg#logo"></use></svg>
+			{{/if_index}}
+			{{^if_index}}
+				<a href="/">
+					<svg class="logo"><use xlink:href="img/sprite.svg#logo"></use></svg>
+				</a>
+			{{/if_index}}
+		</div>
+		<div id="header_content" class="block">
+			<span id="title">Дескриптор <br>сайта</span>
+		</div>
+		<div id="header_contacts" class="block block-group">
+			<div id="city" class="block"><div>Ваш город: <span id="cityname">{{city}}</span></div></div>
+			<div id="contacts" class="block">
+				<p>
+					<a href="" rel="nofollow"><svg class="vk"><use xlink:href="img/sprite.svg#vk"></use></svg></a>
+					<a class="writeme"  href="https://api.whatsapp.com/send?phone=79091590500" rel="nofollow"><svg class="whatsapp"><use xlink:href="img/sprite.svg#whatsapp"></use></svg></a>
+					<a class="writeme"  href="viber://chat?number=79091590500" rel="nofollow"><svg class="viber"><use xlink:href="img/sprite.svg#viber"></use></svg></a>
+					<!--<a href="tg://resolve?domain=sitelikeyou" rel="nofollow"><svg class="telegram"><use xlink:href="img/sprite.svg#telegram"></use></svg></a>-->
+				</p>
+				<p>с 09:00 до 21:00 по МСК</p>
+			</div>
+			<div id="phone" class="block"><p class="ename">+7 (909<span>4</span>) 159-05-00</p><a href="#" class="pale_but">Заказать звонок</a></div>
+		</div>
+		<nav class="menu block">
+			<div class="menu__mobile">
+			  <span>≡</span>
+			</div>
+			
+			<ul class="menu__bar block-group">
+			  <li class="menu__item block">
+				{{#if_about}}
+					<span class="menu__link link__active">О нас</span>
+				{{/if_about}}
+				{{^if_about}}
+					<a href="/about" class="menu__link">О нас</a>
+				{{/if_about}}
+			  </li>
+			  <li class="menu__item is-dropdown block">
+				<a class="menu__link">Курсы</a>
+				<ul class="menu__dropdown">
+				  <li class="menu__item">
+					<a data-url="/" class="menu__link norobotlink">Продажи для фотографа</a>
+				  </li>
+				</ul>
+			  </li>
+			  <li class="menu__item block">
+				{{#if_articles}}
+					<span class="menu__link link__active">Статьи</span>
+				{{/if_articles}}
+				{{^if_articles}}
+					<a href="/articles" class="menu__link">Статьи</a>
+				{{/if_articles}}
+					
+			  </li>
+			  
+			  <li class="menu__item block">
+				{{#if_cert}}
+					<span class="menu__link link__active">Сертификаты</span>
+				{{/if_cert}}
+				{{^if_cert}}
+					<a href="/cert" class="menu__link">Сертификаты</a>
+				{{/if_cert}}
+			  </li>
+			  
+			  <li class="menu__item is-dropdown block">
+				<a class="menu__link">Наши работы</a>
+				<ul class="menu__dropdown">
+				  <li class="menu__item">
+				  {{#if_portfolio}}
+					<span class="menu__link link__active">Портфолио</span>
+				  {{/if_portfolio}}
+				  {{^if_portfolio}}
+					<a href="/portfolio" class="menu__link">Портфолио</a>
+				  {{/if_portfolio}}
+				  </li>
+				  <li class="menu__item">
+					{{#if_testimonials}}
+						<span class="menu__link link__active">Отзывы о нас</span>
+					{{/if_testimonials}}
+					{{^if_testimonials}}
+						<a href="/testimonials" class="menu__link">Отзывы о нас</a>
+					{{/if_testimonials}}
+				  </li>
+				</ul>
+			  </li>
+			  
+			  <li class="menu__item block">
+				<a href="/user/login" class="menu__link cab">Кабинет</a>
+			  </li>
+			  
+			  <li class="menu__item block">
+			  {{#if_feedback}}
+				<span class="menu__link link__active">Контакты</span>
+			  {{/if_feedback}}
+			  {{^if_feedback}}
+				<a href="/feedback" class="menu__link">Контакты</a>
+			  {{/if_feedback}}
+			  </li>
+			</ul>
+		</nav>
+	</header>

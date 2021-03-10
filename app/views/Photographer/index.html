@@ -1,0 +1,74 @@
+{{>head}}
+{{>header}}
+<div id="content" class="block">
+	
+	<section id="marketing">
+	<h1>Sample text</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit velit mauris, eget convallis libero facilisis at. Donec quam elit, mollis quis varius vitae, porta sed justo. Cras leo risus, suscipit quis lacinia vestibulum, sodales nec velit. Fusce orci sem, vestibulum tincidunt laoreet quis, ultricies id diam. Sed id sem tempor, consequat risus vel, viverra urna. Nunc ac mattis elit. Phasellus nec augue vulputate, dapibus enim vitae, sollicitudin libero. Ut cursus et risus id vulputate. Nunc eros justo, euismod ac turpis a, laoreet dignissim enim. Donec at vestibulum urna, eu posuere augue. Morbi ultricies viverra dapibus. Fusce feugiat lorem vel lacinia iaculis. In hac habitasse platea dictumst. Nam auctor urna aliquet enim sodales, eu vulputate lorem semper. Cras tristique vel ex in pellentesque. Aenean velit eros, laoreet sed consequat sed, pellentesque ac felis.</p>
+
+	<p>Aliquam eu neque quis sem sodales laoreet non ac nibh. Vestibulum ornare nunc nec ipsum vulputate lobortis. Proin consectetur purus vitae placerat gravida. Suspendisse ultricies mollis consequat. Nam pellentesque sagittis commodo. Cras eget lacinia risus. Ut blandit consequat consectetur. Vestibulum mauris justo, malesuada ac quam et, scelerisque placerat est. Proin leo risus, facilisis malesuada nulla id, dictum venenatis augue. Quisque sagittis tellus nisi, vitae pulvinar metus sagittis quis. Duis fringilla nisl a rhoncus iaculis. Donec ultricies consequat lectus, non blandit arcu mollis vel. Curabitur aliquet erat ac leo commodo, sed condimentum arcu imperdiet. Cras sit amet vestibulum erat.</p>
+
+	</section>
+	<section id="rates">
+	<a id="cource_rates"></a>
+		<h2>Тарифы</h2>
+		<div id="prices" class="block-group">
+			<div id="self" class="block">
+				<div itemscope itemtype="http://schema.org/Product">
+				<h3 itemprop="name">{{rates.self.name}}</h3>
+				<hr>
+					<div itemprop="description" class="nocenter">
+						<p><span>☑</span> Sample option 1</p>
+						<p><span>☑</span> Sample option 2</p>
+					</div>
+                    {{#rates.self}}
+                        {{>rates}}
+                    {{/rates.self}}
+				</div>
+			</div>
+			<div id="team" class="block">
+				<div itemscope itemtype="http://schema.org/Product">
+				<h3 itemprop="name">Команда</h3>
+				<hr>
+					<div itemprop="description" class="nocenter">
+						<p><span>☑</span> Sample option 1</p>
+						<p><span>☑</span> Sample option 2</p>
+						<p><span>☑</span> Sample option 3</p>
+						<p><span>☑</span> Sample option 4</p>
+						<p><span>☑</span> Sample option 5</p>
+					</div>
+					{{#rates.team}}
+                        {{>rates}}
+                    {{/rates.team}}
+				</div>
+			</div>
+			<div id ="premium" class="block">
+				<div itemscope itemtype="http://schema.org/Product">
+				<h3 itemprop="name">Premium</h3>
+				<hr>
+					<div itemprop="description" class="nocenter">
+						<p><span>☑</span> Sample option 1</p>
+						<p><span>☑</span> Sample option 2</p>
+						<p><span>☑</span> Sample option 3</p>
+						<p><span>☑</span> Sample option 4</p>
+						<p><span>☑</span> Sample option 5</p>
+						<p><span>☑</span> Sample option 6</p>
+						<p><span>☑</span> Sample option 7</p>
+					</div>
+					{{#rates.premium}}
+                        {{>rates}}
+                    {{/rates.premium}}
+				</div>
+			</div>
+		<div class="nocenter">
+			<p>* Первый платеж открывает доступ к курсу.<br>Второй платеж производится до загрузки готового сайта на хостинг</p>
+		</div>
+		</div>
+	</section>
+	<section id="questions">
+		{{>questions}}
+	</section>
+	{{>hidden}}
+</div>
+{{>footer}}
+{{>ending}}

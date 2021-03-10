@@ -1,0 +1,121 @@
+{{>head}}
+<link rel="stylesheet" href="/assets/plyr/plyr.min.css" />
+{{>header}}
+  {{>sidebar}}
+
+	{{>second-header}}
+	
+	<div class="wrapper">
+	
+		{{>breadcrumbs}}
+		
+		<div id="mob-title" class="block">
+			<h4>Урок {{lesdata.position}}. {{lesdata.name}}</h4>
+		</div>
+		
+		<div class="lesson-wrap block-group">
+			<div class="lesson-content block paper">
+            {{#lesdata.finished}}
+            <div class="deadline">Дедлайн остановлен :)</div>
+            {{/lesdata.finished}}
+            {{^lesdata.finished}}
+            {{#nodeadline}}
+            <div class="deadline">Дедлайн через:</div>
+			<div class="cid_{{lesdata.cid}} styled"></div>
+            {{/nodeadline}}
+            {{/lesdata.finished}}
+				<div class="lesson_content">
+				{{{lesdata.content}}}
+				</div>
+				{{#lesdata.stop}}
+				<p class="approved"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Стоп-урок</p>
+				{{#lesdata.accepted}}
+				<p class="approved"><i class="fa fach fa-check-square-o" aria-hidden="true"></i> Задание принято</p>
+				{{/lesdata.accepted}}
+				{{^lesdata.accepted}}
+				<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Нет принятого задания</p>
+				{{/lesdata.accepted}}
+				{{/lesdata.stop}}
+				
+				<div class="comments">
+					<h4>Ответы к уроку</h4>
+					{{#answers}}
+					<div class="{{#bycur}}teacher{{/bycur}}{{^bycur}}user{{/bycur}}-comm">
+						<a name="id{{aid}}"></a>
+						<div class="comm-info">
+							{{adate}}
+						</div>
+						<div class="ava">
+							<img class="with-shadow" src="{{ava}}" alt="">
+							<div class="commentor"><a class="commentor-link" href="#">{{name}} {{surname}}</a></div>
+						</div>
+						<div class="comm with-shadow">{{{content}}}
+							{{#accepted}}<div class="approved_answer"><i class="fa fach fa-check-square-o" aria-hidden="true"></i> Принятый ответ</div>{{/accepted}}
+						</div>
+					</div>
+					{{/answers}}
+					<!--
+					<div class="teacher-comm">
+						<div class="comm-info">
+							2018-02-13 08:28
+						</div>
+						<div class="ava">
+							<img class="with-shadow" src="img/face2.jpg" alt="">
+							<div class="commentor"><a class="commentor-link" href="#">Ольга Пехтина (Куратор)</a></div>
+						</div>
+						<div class="comm with-shadow">Комментарий препода<br> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, voluptate, beatae, aliquam accusamus voluptatibus quae cupiditate nobis corrupti deserunt sed quam assumenda ut. Deserunt, blanditiis in ipsa sint mollitia laudantium.</div>
+					</div>
+					-->
+				</div>
+				<form action="/answer/add" method="POST">
+					<input type="hidden" name="lid" value="{{lid}}">
+					<div class="trumbowyg-dark">
+						<textarea id="textarea" name="com" placeholder="Введите ваш ответ / комментарий к уроку"></textarea>
+					</div>
+					<p>
+						<input class="comm-sub" type="submit" value="Отправить">
+					</p>
+				</form>
+			</div>
+		</div>
+	
+	</div>
+
+  {{>footer}}
+  
+    <script src="/assets/plyr/plyr.min.js"></script>
+	<script>
+	  const player = new Plyr('.player');
+	</script>
+	
+	<script src="/assets/trumbowyg/trumbowyg.min.js"></script>
+	<script type="text/javascript" src="/assets/trumbowyg/langs/ru.min.js"></script>
+	
+	<script>
+		$('#textarea').trumbowyg({
+			lang: 'ru',
+			autogrow: true,
+			btns: [
+				['formatting'],
+				['undo', 'redo'], // Only supported in Blink browsers
+				['strong', 'em', 'underline', 'del'],
+				['link'],
+				['insertImage'],
+				['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+				['unorderedList', 'orderedList'],
+				['horizontalRule'],
+				['removeformat'],
+				['fullscreen']
+			]
+		});
+	</script>
+	
+	<script>
+	$('.cid_{{lesdata.cid}}.styled').countdown({
+	  date: new Date({{lesdata.deadline}} * 1000),
+	  render: function(data) {
+		$(this.el).html("<div>" + this.leadingZeros(data.years, 1) + " <span>лет</span></div><div>" + this.leadingZeros(data.days, 1) + " <span>дней</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>часов</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>минут</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>секунд</span></div>");
+	  }
+	});
+  </script>
+{{>ending}}

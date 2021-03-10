@@ -1,0 +1,302 @@
+{{>head}}
+  <!-- Croppie -->
+  <link rel="stylesheet" href="/assets/croppie/croppie.min.css">
+{{>header}}
+
+  {{>sidebar}}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Добавить новую статью</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+		<div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Форма добавления новой статьи</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+            <div class="card-body">
+              <div class="form-group row">
+                <label for="inputTitle" class="col-sm-2 col-form-label">Название статьи</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Название статьи">
+                </div>
+              </div>
+			  <div class="form-group row">
+                <label for="inputSEOTitle" class="col-sm-2 col-form-label">SEO Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputSEOTitle" name="seotitle" placeholder="Мета тег title для SEO">
+                </div>
+              </div>
+			  <div class="form-group row">
+                <label for="inputSEODesc" class="col-sm-2 col-form-label">SEO Description</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputSEODesc" name="seodesc" placeholder="Мета тег description для SEO">
+                </div>
+              </div>
+			  <div class="form-group row">
+                <label for="inputSEOKeyw" class="col-sm-2 col-form-label">SEO Keywords</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputSEOKeyw" name="seokeyw" placeholder="Мета тег keywords для SEO">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputAlias" class="col-sm-2 col-form-label">
+					Алиас статьи
+					<a data-toggle="collapse" href="#collapseAlas" aria-expanded="false" aria-controls="collapseAlas">
+					<i class="far fa-question-circle"></i>
+				  </a>
+				</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputAlias" name="alias" placeholder="Алиас статьи">
+				  <div class="collapse" id="collapseAlas">
+					  <p>Алиас - это название статьи в адресе, например: https://someproject.ru/photographer/selling-portfolio-how-to</p>
+					  <p>photographer - это алиас рубрики</p>
+					  <p>selling-portfolio-how-to - это алиас. То есть это транслит в латиницу или перевод на английский язык 2-3 ключевых слова из статьи (например) "Как фотографу сделать крутое продающее портфолио". Алиас должен содержать ключевые слова.</p>
+				  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="reservationdate" class="col-sm-2 col-form-label">
+				Дата публикации
+				<a data-toggle="collapse" href="#collapseDate" aria-expanded="false" aria-controls="collapseDate">
+					<i class="far fa-question-circle"></i>
+				</a>
+				</label>
+                <div class="col-sm-10">
+					<div class="form-group">
+						<div class="input-group date" id="reservationdate" data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input" name="pubdate" data-toggle="datetimepicker" data-target="#reservationdate">
+							<!--
+							<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+							-->
+						</div>
+					</div>
+					<div class="collapse" id="collapseDate">
+					  <p>Введите время публикации или оставьте это поле пустым для немедленной публикации</p>
+					  <p>Статья не появится на сайте до тех пор пока не наступит указанная дата и время</p>
+					</div>
+                </div>
+              </div>
+			  <div class="form-group row">
+					<label for="selectCat" class="col-sm-2 col-form-label">Рубрика</label>
+					<div class="col-sm-10">
+						  <select class="form-control select2" id="selectCat" name="category" style="width: 100%;">
+						  {{#cats}}
+							<option value="{{cat_id}}">{{cat_title}}</option>
+						  {{/cats}}
+						  </select>
+					</div>                  
+                </div>
+			  <div class="form-group row">
+                <label for="inputFile" class="col-sm-2 col-form-label">
+				Главное изображение
+				<a data-toggle="collapse" href="#collapseImg" aria-expanded="false" aria-controls="collapseImg">
+					<i class="far fa-question-circle"></i>
+				</a>
+				</label>
+                <div class="col-sm-10">
+                  <input type="file" class="form-control inputfile" id="aimg" name="aimg">
+				  <div class="collapse" id="collapseImg">
+					  <p>Главное изображение - это большое изображение перед самой статьей</p>
+					  <p>Его разрешение должно быть 1920x1080 в формате jpeg (расширением .jpg)</p>
+					</div>
+				  <button type="button" id="file_reset" class="btn btn-secondary mt-3 mb-3">Удалить изображение</button>
+				  <div id="preview">
+					<p>Выберите область для портретных экранов:</p>
+				  </div>
+                </div>
+              </div>
+			  <input id="for-image" type="hidden" name="myhidden" value="">
+			  <div class="form-group row">
+                <label for="editor" class="col-sm-2 col-form-label">Статья</label>
+                <div class="col-sm-10">
+					<div class="trumbowyg-dark">
+						<textarea id="editor" name="html"></textarea>
+					</div>
+                </div>
+              </div>
+			  
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-info" name="submit" value="Создать новую версию курса">Создать</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {{>control-sidebar}}
+
+{{>footer}}
+<script src="/assets/trumbowyg/trumbowyg.js"></script>
+<script type="text/javascript" src="/assets/trumbowyg/langs/ru.min.js"></script>
+<!-- Import Trumbowyg plugins... -->
+<script src="/assets/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="/assets/trumbowyg/plugins/pasteembed/trumbowyg.pasteembed.js"></script>
+<script src="/assets/croppie/croppie.min.js"></script>
+
+<script>
+
+// New file upload form
+
+$('#file_reset').hide();
+
+var el = document.getElementById('preview');
+var elj = $(el);
+
+var vanilla = new Croppie(el, {
+	viewport: { width: 270, height: 480 },
+	boundary: { width: 853, height: 480 },
+	showZoomer: false,
+	enableOrientation: false
+});
+
+elj.hide();
+
+function crop(imgblob){
+	
+	elj.show();
+	
+	vanilla.bind({
+		url: imgblob
+	});
+	
+	document.getElementById('file_reset').addEventListener('click', function(){
+		document.getElementById('aimg').value = '';
+		elj.hide();
+		$('#file_reset').hide();
+		//vanilla.destroy();
+	});
+	
+	el.addEventListener('update', function(ev) {
+		vanilla.result({type: 'base64', size: 'original', format: 'jpeg', quality: 1, circle: false}).then(function(b64) {
+		// do something with cropped blob
+		//console.log(b64);
+		document.getElementById('for-image').value = b64;
+		});
+	});
+
+}
+
+;( function ( document, window, index )
+{
+    var inputs = document.querySelectorAll( '.inputfile' );
+    Array.prototype.forEach.call( inputs, function( input )
+    {
+        var label    = input.nextElementSibling,
+            labelVal = label.innerHTML;
+
+        input.addEventListener( 'change', function( e )
+        {
+            var fileName = '';
+            if( this.files && this.files.length > 1 )
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+                fileName = e.target.value.split( '\\' ).pop();
+			/*
+            if( fileName )
+                label.querySelector( 'span' ).innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+            */
+            // Show picture before upload
+            //var previ = event.target.nextElementSibling.nextElementSibling;
+			var imgblob = URL.createObjectURL(event.target.files[0]);
+			/*
+            var newimg = document.createElement("img");
+            newimg.src = URL.createObjectURL(event.target.files[0]);
+            newimg.classList.add("preupl");
+			
+			// Remove all children from preview element
+			previ.innerHTML = '';			
+            previ.appendChild(newimg);
+			*/
+			$('#file_reset').show();
+			
+			crop(imgblob);
+        });
+
+        // Firefox bug fix
+        input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+        input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+    });
+}( document, window, 0 ));
+
+$('#editor').trumbowyg({
+	lang: 'ru',
+	autogrow: true,
+	btnsDef: {
+		// Create a new dropdown
+		image: {
+			dropdown: ['upload'],
+			ico: 'insertImage'
+		}
+	},
+	// Redefine the button panel
+	btns: [
+		['viewHTML'],
+		['formatting'],
+		['strong', 'em', 'underline', 'del'],
+		['superscript', 'subscript'],
+		['link'],
+		['image'], // Our fresh created dropdown
+		['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+		['unorderedList', 'orderedList'],
+		['horizontalRule'],
+		['removeformat'],
+		['fullscreen']
+	],
+	plugins: {
+		upload: {
+			serverPath: '{{index}}{{adminname}}/articles/upload',
+			fileFieldName: 'image',
+			urlPropertyName: 'url'
+		}
+	}
+});
+/*
+var editor = new Jodit('#editor', {
+    theme: "dark",
+	uploader: {
+        url: '{{index}}{{adminname}}/articles/upload?action=fileUpload'
+    },
+	filebrowser: {
+        ajax: {
+            url: '{{index}}{{adminname}}/articles/upload'
+        }
+    }
+});
+editor.value = '<p>Текст вашей статьи</p>';
+*/
+$(function () {
+    $('#reservationdate').datetimepicker({
+        locale: 'ru',
+		minDate: new Date()
+    });
+});
+
+</script>
+
+{{>ending}}

@@ -1,0 +1,29 @@
+		<h2>Форма обратной связи</h2>
+		<div id="qwrap">
+			<form id="qform" action="{{index}}fbform" method="post">
+				<p>Как с вами связаться:</p>
+				<input type="text" name="contact" placeholder="Электроння почта, телефон, whatsapp, viber, telegram..." required="required">
+				<div id="clarify" class="hide">
+					<p>Что лучше использовать для связи с вами?</p>
+					<p>
+						<input type="checkbox" name="phonecall"> Телефонный звонок
+					</p>
+					<p>
+						<input type="checkbox" name="whatsapp"> WhatsApp
+					</p>
+					<p>
+						<input type="checkbox" name="viber"> Viber
+					</p>
+					<p>
+						<input type="checkbox" name="telegram"> Telegram
+					</p>
+				</div>
+				<p>Ваш вопрос:</p>
+				<textarea name="message" cols="30" rows="10" placeholder=""></textarea>
+				{{>captcha}}
+				<input type="text" class="hide" name="captcha" placeholder="Введите текст с картинки">
+				<input type="text" class="hide" name="addr" placeholder="Введите ваш адрес">
+				<p id="qsend"><input type="submit" class="bright_but" value="Отправить"></p>
+			</form>
+		</div>
+		{{>overlays}}

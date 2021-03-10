@@ -1,0 +1,60 @@
+{{>head}}
+{{>header}}
+	<div id="content" class="block">
+		<div id="wrapper" class="block-group">
+			<div itemscope itemtype="http://schema.org/Blog" id="main" class="block">
+				{{>breadcrumbs}}
+				<h1>{{cat-title}}</h1>
+				<article itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting" class="post">
+					{{#art_list}}
+					<a itemprop="mainEntityOfPage" href="articles/{{cat_alias}}/{{alias}}" class="hide"></a>
+					<h2 itemprop="headline">{{title}}</h2>
+					<div class="postmeta">
+						<svg class="ptime"><use xlink:href="img/sprite.svg#watch"></use></svg>
+						{{pubdate}}
+						<meta itemprop="datePublished" content="{{metadate}}">
+						<svg class="pcom"><use xlink:href="img/sprite.svg#comm"></use></svg>
+						<a href="{{index}}articles/{{cat_alias}}/{{alias}}#comments">{{comments}}</a>
+						<svg class="pcat"><use xlink:href="img/sprite.svg#categoty"></use></svg>
+						{{#cycle-link}}
+							<a href="{{index}}articles/{{cat_alias}}">{{cat}}</a>
+						{{/cycle-link}}
+						{{^cycle-link}}
+							{{cat}}
+						{{/cycle-link}}
+						{{}}
+						<meta itemprop="author" content="Андрей Ворожко">
+						<div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+							<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+								<img itemprop="url image" src="img/logo.png" alt="Веб-студия и онлайн-школа someproject.ru" title="Логотип someproject.ru" style="display:none;"/>
+							</div>
+							<meta itemprop="name" content="Вебстудия и онлайн-школа someproject.ru">
+							<meta itemprop="telephone" content="+7(950) 810-8037">
+							<meta itemprop="address" content="Россия">
+						</div>
+					</div>
+					<div itemprop="image" itemscope itemtype="http://schema.org/ImageObject" class="ppwrap">
+						<picture>
+							<source media="(max-width: 481px)" srcset="upl/articles/{{id}}/{{aimg}}_mob_po.webp, upl/articles/{{id}}/{{aimg}}_hd_po.webp 2x"/>
+							<source media="(orientation: landscape)" srcset="upl/articles/{{id}}/{{aimg}}_mob_po.webp, upl/articles/{{id}}/{{aimg}}_hd_po.webp 2x"/>
+							<source media="(orientation: portrait)" srcset="upl/articles/{{id}}/{{aimg}}_mob_la.webp, upl/articles/{{id}}/{{aimg}}_hd_la.webp 2x"/>
+							<img src="upl/articles/{{id}}/{{aimg}}_mob_po.jpg" srcset="upl/articles/{{id}}/{{aimg}}_mob_po.webp, upl/articles/{{id}}/{{aimg}}_hd_po.webp 2x" alt="Продажи для фотографа"/>
+						</picture>
+						<link itemprop='url' href='upl/articles/{{id}}/{{aimg}}_hd_la.webp' />
+					</div>
+					{{{html}}}...
+					<div class="readmore"><a class="pale_but" href="articles/{{cat_alias}}/{{alias}}">ЧИТАТЬ ДАЛЕЕ ≻</a></div>
+					{{/art_list}}
+				</article>
+			</div>
+			
+			{{>sidebar}}
+			<div class="pagination-wraper block">
+			{{{pagination}}}
+			</div>
+		</div>
+		{{>feedback}}
+		{{>hidden}}
+	</div>
+{{>footer}}
+{{>ending}}

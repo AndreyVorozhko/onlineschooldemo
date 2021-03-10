@@ -1,0 +1,32 @@
+	<div id="login" style="display:none;">
+		<div id="lwrap">
+			{{#if_signed}} {{! if authorized }}
+			<p>Вы авторизованы как<br></p>
+			<p><img id="user-ava" src="{{user-ava}}" alt="{{user-name}} {{user-surname}}"></p>
+			<p id="user-name"><b>{{user-name}} {{user-surname}}</b></p>
+						{{#if_admin}}
+							<p><a href="{{index}}{{adminname}}">Админпанель</a></p>
+							<p><a href="user/area">Личный кабинет</a></p>
+							<p><a href="user/logout">Выход</a></p>
+						{{/if_admin}}
+						{{^if_admin}}
+							<p><a href="user/area">Перейти</a></p>
+							<p><a href="user/logout">Выход</a></p>
+						{{/if_admin}}
+			{{/if_signed}}
+			{{^if_signed}} {{! if NOT authorized }}
+			<form id="log" method="post">
+				<p>Логин:</p>
+				<input type="text" name="login" placeholder="Email или телефон">
+				<p>Пароль:</p>
+				<input type="password" name="pass" placeholder="Пароль">
+				{{>captcha}}
+				<input type="text" class="hide" name="captcha" placeholder="Введите текст с картинки">
+				<input type="text" class="hide" name="addr" placeholder="Введите ваш адрес">
+				<p id="logbut"><input class="bright_but" type="submit" name="enter" value="Войти"></p>
+			</form>
+			<a id="newreg" href="">Регистрация</a>
+			<a id="passforget" href="">Забыли пароль?</a>
+			{{/if_signed}}
+		</div>
+	</div>

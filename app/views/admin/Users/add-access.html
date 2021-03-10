@@ -1,0 +1,197 @@
+{{>head}}
+{{>header}}
+
+  {{>sidebar}}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Добавить курс пользователю</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+		<div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Дать пользователю доступ к курсу</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+			<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+				<div class="card-body">
+				<div class="form-group row">
+					<label for="selectCourse" class="col-sm-2 col-form-label">Выберите проект</label>
+					<div class="col-sm-10">
+						<select class="form-control select2" id="selectCourse" name="project">
+							{{#project_list}}
+							<option selected disabled hidden style='display: none' value=''></option>
+							<option value="{{id}}">{{name}}</option>
+							{{/project_list}}
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="selectVers" class="col-sm-2 col-form-label">Выберите версию курса</label>
+					<div class="col-sm-10">
+						<select class="form-control select2" id="selectVers" name="course">
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="selectRate" class="col-sm-2 col-form-label">Выберите тариф</label>
+					<div class="col-sm-10">
+						<select class="form-control select2" id="selectRate" name="rate">
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="selectCur" class="col-sm-2 col-form-label">Назначить куратором</label>
+					<div class="col-sm-10">
+						<select class="form-control select2" id="selectCur" name="curator">
+						{{#curator_list}}
+							<option value="{{id}}">{{name}} {{surname}} (роль: {{role}})</option>
+						{{/curator_list}}
+						</select>
+					</div>
+				</div>
+				
+				<h3 class="text-warning mt-4 mb-4">Параметры платежа</h3>
+				
+				<div class="form-group row">
+					<div class="col-sm-2">Есть ли платеж?</div>
+					<div class="custom-control custom-switch col-sm-10">
+                      <input type="checkbox" class="custom-control-input" name="payment" id="ipay" value="yes" checked>
+                      <label class="custom-control-label" for="ipay">Да</label>
+                    </div>
+				</div>
+				<div id="payment">
+					<div class="form-group row">
+						<label for="isum" class="col-sm-2 col-form-label">Сумма</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="isum" name="sum" placeholder="Сумма платежа">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="ipaydate" class="col-sm-2 col-form-label">
+						Дата платежа
+						</label>
+						<div class="col-sm-10">
+							<div class="form-group">
+								<div class="input-group date" id="ipaydate" data-target-input="nearest">
+									<input type="text" class="form-control datetimepicker-input" name="paydate" data-toggle="datetimepicker" data-target="#ipaydate">
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-sm-2"></div>
+						<div class="custom-control custom-switch col-sm-10">
+						  <input type="checkbox" class="custom-control-input" name="dop" id="ifup" value="yes">
+						  <label class="custom-control-label" for="ifup">Это доплата?</label>
+						</div>
+					</div>
+					<div id="hidable" class="form-group row d-none">
+						<label for="selectUp" class="col-sm-2 col-form-label">Доплата, то с какого тарифа?</label>
+						<div class="col-sm-10">
+							<select class="form-control select2" id="selectUp" name="upfrom">
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="editor" class="col-sm-2 col-form-label">Комментарий к платежу</label>
+						<div class="col-sm-10">
+							<div class="trumbowyg-dark">
+								<textarea id="editor" name="com"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-info" name="submit" value="Создать новый проект">Создать</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {{>control-sidebar}}
+
+{{>footer}}
+<script src="/assets/trumbowyg/trumbowyg.js"></script>
+<script type="text/javascript" src="/assets/trumbowyg/langs/ru.min.js"></script>
+<!-- Import Trumbowyg plugins... -->
+<script src="/assets/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="/assets/trumbowyg/plugins/pasteembed/trumbowyg.pasteembed.js"></script>
+
+<script>
+
+$('#editor').trumbowyg({
+	lang: 'ru',
+	autogrow: true
+});
+
+$(window).on('load', function(){
+
+	function rellistRate(element){
+		var projid = element.val();
+		
+		if(projid != null){
+			$('#selectRate,#selectUp').load('{{index}}{{adminname}}/users/get-rates/' + projid + '#target');
+		}
+	}
+	
+	function rellistVers(element){
+		var projid = element.val();
+		
+		if(projid != null){
+			$('#selectVers').load('{{index}}{{adminname}}/users/get-versions/' + projid + '#target');
+		}
+	}
+	
+	rellistRate($('#selectCourse'));
+	rellistVers($('#selectCourse'));
+
+	$('#selectCourse').on('change', function(){
+		rellistRate($(this));
+		rellistVers($(this));
+	});
+	
+	$('#ifup').on('change', function(){
+		$('#hidable').toggleClass('d-none');
+	});
+	
+	$('#ipay').on('change', function(){
+		$('#payment').toggleClass('d-none');
+		if($(this).prop('checked')){
+			$('label[for=ipay]').text('Да');
+		}else{
+			$('label[for=ipay]').text('Нет');
+		}
+	});
+});
+
+$(function () {
+    $('#ipaydate').datetimepicker({
+        locale: 'ru'
+    });
+});
+
+</script>
+
+{{>ending}}

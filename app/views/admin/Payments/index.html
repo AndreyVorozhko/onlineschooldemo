@@ -1,0 +1,139 @@
+{{>head}}
+{{>header}}
+
+  {{>sidebar}}
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Платежи</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+	  
+		<p class="text-warning">Добавить платеж и открыть доступ к курсу можно в карточке конкретного пользователя в разделе <a href="users">пользователи</a></p>
+		
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Все платежи</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>user</th>
+                      <th>course</th>
+                      <th>rate</th>
+                      <th>sum</th>
+                      <th>date</th>
+                      <th>com</th>
+                      <th>upfrom</th>
+                      <th>curator</th>
+                      <th>new</th>
+                      <th>actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+					{{#payments_list}}
+                    <tr>
+                      <td>{{id}}</td>
+					  <th><a href="users/view/{{uid}}">{{name}} {{surname}}</a></th>
+					  <th>{{course}}</th>
+					  <th>{{rname}} ({{price}}) р.</th>
+					  <th>{{sum}} р.</th>
+					  <th>{{date}}</th>
+					  <th>{{{com}}}</th>
+					  <th>{{upname}} ({{uprice}} р.)</th>
+					  <th><a href="users/view/{{curid}}">{{curname}} {{cursurname}}</a></th>
+					  <th>{{new}}</th>
+                      <td>
+						<a href="payments/edit/{{id}}"><i class="far fa-edit"></i></a>
+						<a href="payments/delete/{{id}}" data-username="{{name}}" data-toggle="modal" data-target="#userdel"><i class="far fa-trash-alt"></i></a>
+					  </td>
+                    </tr>
+					{{/payments_list}}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+			  <div class="card-footer clearfix">
+                {{{pagination}}}
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+		
+      </div>
+	  <!-- /.container-fluid -->
+	  
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- /.wrapper -->
+
+  {{>control-sidebar}}
+  
+	<!-- Modal -->
+	<div class="modal fade" id="userdel">
+      <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:#000">Внимание!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>Удалить пользователя:<br>"<span id="username"></span>"?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a id="yesdel" type="button" class="btn btn-outline-dark">Да</a>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Нет</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+{{>footer}}
+<script>
+	$('#userdel').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var username = button.data('username') // Extract info from data-* attributes
+	  var link = button.attr('href');
+	  
+	  var modal = $(this);
+	  modal.find('#username').text(username);
+	  modal.find('#yesdel').attr('href', link);
+	})
+
+</script>
+{{>ending}}

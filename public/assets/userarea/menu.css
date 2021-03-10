@@ -1,0 +1,244 @@
+
+.open {
+	/*display: inline-block;*/
+	position: fixed;
+}
+
+.hamburger {
+	padding: 10px;
+	height: 42.5px;
+	width: 60px;
+	display: inline-block;
+	cursor: pointer;
+	transition-property: opacity, filter;
+	transition-duration: 0.15s;
+	transition-timing-function: linear;
+	font: inherit;
+	color: inherit;
+	text-transform: none;
+	background-color: transparent;
+	border: 0;
+	margin: 10px 0 0 10px;
+	overflow: visible;
+	position: relative;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.hamburger:focus {
+	outline: none;
+	text-decoration: none;
+}
+
+.hamburger__box {
+	width: 30px;
+	display: inline-block;
+	height: 25px;
+	position: relative;
+}
+
+.hamburger__inner {
+	display: block;
+	top: 50%;
+	width: 30px;
+	height: 1px;
+	top: auto;
+	bottom: 5px;
+	background-color: #799691;
+	border-radius: 2px;
+	position: absolute;
+	transition-property: transform;
+	transition-duration: 0.15s;
+	transition-timing-function: ease;
+}
+
+.hamburger__inner:before,
+.hamburger__inner:after {
+	width: 30px;
+	height: 1px;
+	background-color: #799691;
+	border-radius: 2px;
+	position: absolute;
+	transition-property: transform;
+	transition-duration: 0.15s;
+	transition-timing-function: ease;
+}
+
+.hamburger__inner:before,
+.hamburger__inner:after {
+	content: "";
+	display: block;
+}
+
+.hamburger__inner:before {
+	top: -8px;
+}
+
+.hamburger__inner:after {
+	top: -16px;
+}
+
+.menu__panel {
+	background-color: #2b3c46;
+	margin: 0;
+	padding: 0;
+	box-shadow: 0 0 10px rgba(0,0,0,.28);
+}
+
+.sideout-menu {
+	position: fixed;
+	left: -264px;
+	top: 0;
+	z-index: 1050;
+	width: 264px;
+	height: 100vh;
+	overflow-x: hidden;
+	/*overflow-y: scroll;*/
+	/*-webkit-overflow-scrolling: touch;*/
+}
+
+.close__side {
+	display: inline-block;
+	position: absolute;
+	right: 15px;
+	top: 12px;
+}
+
+.slide-down{
+	width: 32px;
+	fill: #66889d;
+	padding: 2px;
+	height: 32px;
+	border: 1px solid #22313a;
+	border-radius: 2px;
+}
+
+.slide-down:hover{
+	fill: #37d6f0;
+	cursor: pointer;
+	background-color: #202d35;
+	border-color: #66889d;
+	box-shadow: 0px 0px 4px #47ffff;
+}
+
+.head{
+	text-align: center;
+	font-size: large;
+	margin: 20px 0 20px -20px;
+	font-family: 'Cantarell', sans-serif;
+}
+
+.docs {
+	font-size: 14px;
+	color: #6b6b6b;
+	font-weight: 300;
+	padding-left: 30px;
+}
+
+.docs__list {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+.docs__link {
+	display: block;
+	padding: 10px 30px;
+	text-decoration: none;
+	color: #269186;
+	font-size: 16px;
+	transition: background .15s ease;
+}
+
+.docs__link:hover {
+	background: rgba(0,0,0,0.12);
+}
+
+a.docs__link>.menu__icon{
+	width: 32px;
+	height: 32px;
+	float: left;
+	fill: #269186;
+	margin-right: 20px;
+	margin-top: -5px;
+	-webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+	filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+}
+
+a.docs__link>.active-icon{
+	fill: #64ffff;
+	-webkit-filter: drop-shadow( 0px 0px 2px rgb(100, 255, 255));
+	filter: drop-shadow( 0px 0px 2px rgb(100, 255, 255));
+}
+
+a.docs__link{
+	color: #7996a9;
+	font-family: 'Cantarell', sans-serif;
+	font-weight: normal;
+	position: relative;
+}
+
+.docs__item:hover .menu__icon {
+	fill: #64ffff;
+	-webkit-filter: drop-shadow( 0px 0px 2px rgb(100, 255, 255));
+	filter: drop-shadow( 0px 0px 2px rgb(100, 255, 255));
+}
+
+.content {
+	width: 100%;
+	max-width: 960px;
+	margin: 35px auto;
+	padding: 0 15px;
+}
+
+.something-new{
+	position: absolute;
+	color: #fff;
+	font-size: 10px;
+	background-color: #bd0e0e;
+	border-radius: 20px;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	font-family: consolas;
+	line-height: 16px;
+	top: 5px;
+	left: 60px;
+}
+
+.hamburger-new{
+	position: absolute;
+	color: #fff;
+	font-size: 10px;
+	background-color: #bd0e0e;
+	border-radius: 20px;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	font-family: consolas;
+	line-height: 16px;
+	z-index: 1;
+	right: 5px;
+	top: 5px;
+}
+
+.avatar{
+	width: 100px;
+	margin: 0 auto;
+	border-radius: 300px;
+}
+
+.avatar>img{
+	width: 100%;
+	margin: 0 auto;
+	border-radius: 300px;
+}
+
+.name{
+	width: 90%;
+	font-size: 16px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 5px 0 30px 0;
+	color: #3fcccc;
+	text-shadow: 0px 0px 6px #47ffff7d;
+}

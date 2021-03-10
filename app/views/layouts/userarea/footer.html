@@ -1,0 +1,56 @@
+	<div id="popup" class="hide">
+		{{{errors}}}
+		{{{success}}}
+	</div>
+	
+	<script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>
+	<script src="/assets/js/jquery.countdown.min.js"></script>
+	
+	<script src="/assets/userarea/sideout.min.js"></script>
+	<script>
+		let sideout = new SideOut({
+			menu: document.querySelector('#menu')
+		});
+		
+		function sideopenIfLarge(){
+			var width  = document.documentElement.clientWidth;
+			if(width > 992){
+				sideout.open();
+			}else{
+				sideout.close();
+			}
+		}
+			
+		sideopenIfLarge();
+		
+		window.addEventListener('resize', sideopenIfLarge);
+
+		document.querySelector('.hamburger').addEventListener('click', function() {
+			sideout.open();
+		});
+
+		document.querySelector('.close__side').addEventListener('click', function() {
+			sideout.close();
+		});
+	</script>
+	
+	<script src="/assets/js/OOP.js"></script>
+	<script src="/assets/js/Overlay.js"></script>
+	<script>
+		/* Emergency messages for user start */
+		if($('#popup').length > 0){
+			if($('#popup').children().is('#emergency')){
+				Overlay.show("emergency", {
+					width: 'auto',
+					height: 'auto',
+					containerClass:"slide-up"
+				});
+			}
+		}
+		/* Emergency messages for user end */
+		
+		$('.okbut').on('click', function(e){
+			(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
+			Overlay.hide();
+		});
+	</script>

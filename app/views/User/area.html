@@ -1,0 +1,69 @@
+{{>head}}
+
+</head>
+
+<body>
+    
+{{>header}}
+  {{>sidebar}}
+
+	{{>second-header}}
+	
+	<div class="wrapper">
+	
+		{{>breadcrumbs}}
+		
+		<div id="mob-title" class="block">
+			<h4>Мои курсы</h4>
+		</div>
+			
+		<div class="course-wrap block-group">
+		{{#courses}}
+			<div class="course-info block"><div class="paper">
+				<div class="poster">
+					<a href="cid/{{id}}" class="poster-link">
+						<img class="with-shadow" src="/upl/projects/{{pid}}/{{img}}" alt="">
+					</a>
+				</div>			
+				<h4>{{name}}</h4>
+                {{#finished}}
+				<div class="deadline">Дедлайн остановлен :)</div>
+                {{/finished}}
+                {{^finished}}
+                    {{#cango}}
+                    {{^nodeadline}}
+                    <div class="deadline">Дедлайн через:</div>
+                    <div class="cid_{{id}} styled"></div>
+                    {{/nodeadline}}
+                    {{/cango}}
+                    {{^cango}}
+                    <div class="deadline">Дедлайн просрочен! :(</div>
+                    {{/cango}}
+                {{/finished}}
+                {{#cango}}
+				<progress max="100" value="{{percent}}"></progress>
+				<span>Прогресс: {{lessons_passed}} / {{lessons_total}} ({{percent}}%)</span>
+				<span class="go-button">
+					<a href="cid/{{id}}" class="aas-button">Перейти к урокам</a>
+				</span>
+                {{/cango}}
+                {{^cango}}
+                <span>Прогресс удален. Доступ закрыт.</span>
+                {{/cango}}
+			</div></div>
+		{{/courses}}
+		</div>
+	
+	</div>
+  {{>footer}}
+	{{#courses}}
+	<script>
+		$('.cid_{{id}}.styled').countdown({
+		  date: new Date({{deadline}} * 1000),
+		  render: function(data) {
+			$(this.el).html("<div>" + this.leadingZeros(data.years, 1) + " <span>лет</span></div><div>" + this.leadingZeros(data.days, 1) + " <span>дней</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>часов</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>минут</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>секунд</span></div>");
+		  }
+		});
+	</script>
+	{{/courses}}
+{{>ending}}

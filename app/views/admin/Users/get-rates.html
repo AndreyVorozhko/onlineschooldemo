@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax service page</title>
+</head>
+<body>
+	<select id="target">
+	{{#rates_list}}
+		<option value="{{id}}">{{name}} (стоимость: {{price}})</option>
+	{{/rates_list}}
+	</select>
+</body>
+</html>

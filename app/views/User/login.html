@@ -1,0 +1,71 @@
+{{>head}}
+
+</head>
+
+<body>
+    
+{{>header}}
+	<div id="content" class="block">
+		<div id="wrapper" class="block-group">
+			<div id="main" class="block">
+				{{>breadcrumbs}}
+				<h1>Страница авторизации</h1>
+				<form id="signup-form" name="loginform" action="/user/login" method="post">
+					<p>
+						<input type="text" name="login" placeholder="e-mail или телефон">
+					</p>
+					<p>
+						<input type="password" name="pass" placeholder="пароль">
+					</p>
+					{{>captcha}}
+					<input type="text" class="hide" name="captcha" placeholder="Введите текст с картинки">
+					<input type="text" class="hide" name="addr" placeholder="Введите ваш адрес">
+					<div id="err"></div>
+					<p>
+						<input class="bright_but" id="login-submit" type="submit" name="knop" value="Вход">
+					</p>
+					<div class="block-group">
+						<div class="block by-2"><a href="/user/addnew">Регистрация</a></div>
+						<div class="block by-2"><a href="/user/newpass">Восстановление пароля</a></div>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+		{{>feedback}}
+		{{>hidden}}
+	</div>
+{{>footer}}
+
+<script src="assets/js/validate.min.js"></script>
+<script>
+
+var validator = new FormValidator('loginform', [{
+			name: 'login',
+			display: '"e-mail или логин"',
+			rules: 'required'
+		}, {
+			name: 'pass',
+			display: '"Пароль"',
+			rules: 'required'
+		}], function(errors, event) {
+			if (errors.length > 0) {
+				var errorString = '';
+
+				for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+					errorString += errors[i].message + '<br />';
+				}
+				document.getElementById('err').innerHTML = '<p id="errors-place">' + errorString + '</p>';
+				
+				if (event && event.preventDefault) {
+				event.preventDefault();
+				} else if (event) {
+					event.returnValue = false;
+				}
+			}else{
+				document.getElementById('err').innerHTML = '';
+			}
+		});
+
+</script>
+{{>ending}}

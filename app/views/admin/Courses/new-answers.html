@@ -1,0 +1,94 @@
+{{>head}}
+{{>header}}
+
+  {{>sidebar}}
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Новые ответы к урокам</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+		
+        <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Список новых ответов</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                {{#answers_list}}
+				<table id="article-list" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>project</th>
+                    <th>lesson</th>
+                    <th>user</th>
+                    <th>content</th>
+                    <th>long</th>
+					<th>actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+				  {{/answers_list}}
+				  {{#answers_list}}
+                  <tr>
+                    <td>{{aid}}</td>
+                    <td>{{pname}}</td>
+                    <td>{{lname}}</td>
+                    <td>{{name}} {{surname}}</td>
+                    <td>{{con}}</td>
+                    <td>{{date}}</td>
+                    <td>
+					<a href="{{index}}{{adminname}}/courses/new-answer-view/lid/{{lid}}/uid/{{uid}}#aid{{aid}}"><i class="far fa-eye"></i></a>
+					</td>
+                  </tr>
+				  {{/answers_list}}
+				  {{#answers_list}}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>id</th>
+                    <th>project</th>
+                    <th>lesson</th>
+                    <th>user</th>
+                    <th>content</th>
+                    <th>long</th>
+					<th>actions</th>
+                  </tr>
+                  </tfoot>
+                </table>
+				{{/answers_list}}
+			  {{^answers_list}}
+				<p>Новых ответов к урокам от пользователей пока нет</p>
+			  {{/answers_list}}
+              </div>
+              <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+		
+      </div>
+	  <!-- /.container-fluid -->
+	  
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- /.wrapper -->
+
+  {{>control-sidebar}}
+  
+{{>footer}}
+{{>ending}}

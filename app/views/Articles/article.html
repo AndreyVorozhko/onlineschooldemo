@@ -1,0 +1,200 @@
+{{>head}}
+{{>header}}
+	<div id="content" class="block">
+		<div id="wrapper" class="block-group">
+			<div id="main" class="block">
+				{{>breadcrumbs}}
+				<div itemscope itemtype="http://schema.org/BlogPosting">
+					<meta itemprop="author" content="Андрей Ворожко">
+					<meta itemprop="datePublished" content="{{metadate}}">
+					<meta itemprop="dateModified" content="{{lastmod}}">
+					<a itemprop="mainEntityOfPage" href="articles/{{cat_alias}}/{{alias}}" class="hide"></a>
+					<div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+						<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+							<img itemprop="url image" src="img/logo.png" alt="Веб-студия и онлайн-школа someproject.ru" title="Логотип someproject.ru" style="display:none;"/>
+						</div>
+						<meta itemprop="name" content="Вебстудия и онлайн-школа someproject.ru">
+						<meta itemprop="telephone" content="+7(950) 810-8037">
+						<meta itemprop="address" content="Россия">
+					</div>
+					<article itemprop="articleBody" class="post">
+						<h1 itemprop="headline">{{title}}</h1>
+						<div class="postmeta">
+							<svg class="ptime"><use xlink:href="img/sprite.svg#watch"></use></svg>
+							{{pubdate}}
+							<meta itemprop="datePublished" content="{{metadate}}">
+							<meta itemprop="dateModified" content="{{lastmod}}">
+							<svg class="pcom"><use xlink:href="img/sprite.svg#comm"></use></svg>
+							<a href="articles/{{cat_alias}}/{{alias}}#comments">{{comments}}</a>
+							<svg class="pcat"><use xlink:href="img/sprite.svg#categoty"></use></svg>
+							<a href="{{index}}articles/{{cat_alias}}">{{cat}}</a>
+						</div>
+						<div itemprop="image" itemscope itemtype="http://schema.org/ImageObject" id="awrap">
+							<picture>
+								<source media="(max-width: 481px)" srcset="upl/articles/{{aid}}/{{aimg}}_mob_po.webp, upl/articles/{{aid}}/{{aimg}}_hd_po.webp 2x"/>
+								<source media="(max-width: 1280px)" srcset="upl/articles/{{aid}}/{{aimg}}_hd_la.webp, upl/articles/{{aid}}/{{aimg}}.webp 2x"/>
+								<source media="(screen)" srcset="upl/articles/{{aid}}/{{aimg}}_hd_la.webp"/>
+								<img src="upl/articles/{{aid}}/{{aimg}}_hd_la.jpg" srcset="upl/articles/{{aid}}/{{aimg}}_hd_la.webp, upl/articles/{{aid}}/{{aimg}}.webp 2x" alt="{{title}}"/>
+								<link itemprop='url' href='upl/articles/{{aid}}/{{aimg}}_hd_la.webp' />
+							</picture>
+						</div>
+						{{{html}}}
+					</article>
+				</div>
+				<section id="comments">
+					<div class="com-title-wrap">
+						<h3>Всего комментариев: <span id="comcount">{{comments}}</span></h3>
+					</div>
+					{{#coms}}
+					<div class="comment {{#admin}}from-admin{{/admin}}" id="com-{{comid}}">
+						<div class="commeta">
+							<span class="author {{#admin}}admin{{/admin}}">{{yourname}}</span>
+							{{#admin}}<span class="role admin">(Администратор)</span>{{/admin}}
+							<span class="date">{{comdate}}</span>
+							{{#if_admin}}
+								<a class="cedit" href="comment/edit/{{comid}}"><svg class="comicon"><use xlink:href="img/sprite.svg#edit"></use></svg></a>
+								<a class="cdel" href="comment/delete/{{comid}}"><svg class="comicon"><use xlink:href="img/sprite.svg#trash"></use></svg></a>
+							{{/if_admin}}
+						</div>
+						<div class="samcom">
+							{{{commtext}}}
+						</div>
+					</div>
+					{{/coms}}
+					<div class="pagination-wraper block">
+						{{{pagination}}}
+					</div>
+					<form id="comform" action="comment/add" method="post">
+					<h3>Оставить комментарий:</h3>
+						{{#if_signed}}
+							<p>Вы вошли как: <strong>{{name}}</strong> (<a href="user/logout">выйти</a>)</p>
+						{{/if_signed}}
+						{{^if_signed}}
+						<p>
+							Как вас зовут:<br>
+							<input id="yname" type="text" name="yourname" placeholder="Ваше имя (и, если хотите, отчество и фамилия)" required>
+						</p>
+						<p>
+							Электронная почта для связи:<br>
+							<input id="ymail" type="email" name="yourmail" placeholder="Ваш e-mail (не обязательно)"><br>
+							<span id="not-for-public">только для связи с вами, не публикуется</span>
+						</p>
+						{{/if_signed}}
+						<input type="hidden" name="artid" value="{{aid}}">
+						Что вы хотите сказать:<br>
+						<textarea id="commtext" name="commtext" placeholder="Ваш комментарий" required></textarea>
+						
+						{{>captcha}}
+						<input type="text" class="hide" name="captcha" placeholder="Введите текст с картинки">
+						<input type="text" class="hide" name="addr" placeholder="Введите ваш адрес">
+						<p>
+							<input class="pale_but" type="submit" name="sbmt" value="Комментировать">
+						</p>
+					</form>
+				</section>
+			</div>
+			
+			{{>sidebar}}
+		</div>
+		{{>feedback}}
+		{{>hidden}}
+	</div>
+{{>footer}}
+
+{{#if_admin}}
+<script>
+	$('.cdel').on('click', function(e){
+		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
+		document.getElementById('confp').innerText = 'Удалить этот комментарий?';
+		var dellink = $(this).attr('href');
+		$('#confirm_yes').attr('href', dellink);
+		Overlay.show("confirm_mes", {
+			width:'auto',
+			height:'auto',
+			containerClass:"slide-up"
+		});
+		
+		$('#confirm_yes').on('click', function(e){
+			(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
+			//console.log($(this).attr('href'));
+			$.ajax.post($(this).attr('href'), '', function(status, data){
+				var answer = JSON.parse(data);
+				if(answer['status'] == 'success' && status == 200){
+					$.one('#com-'+answer['deleted']).remove();
+					var comcount = $.one('#comcount');
+					var num = +comcount.innerText;
+					comcount.innerText = --num;
+				}else if(answer['status'] == 'fail'){
+					/*
+					document.getElementById('from_ajax_error').innerHTML = '<p>Не удалось удалить комментарий<br>Похоже, его уже нет :)</p>';
+					Overlay.show('err_mes',{
+						width:'auto',
+						height:'auto',
+						containerClass:"slide-up"
+					});
+					*/
+				}else if(status != 200){
+					document.getElementById('from_ajax_error').innerHTML = '<p>Не удалось удалить комментарий<br>Обработчик недоступен.</p>';
+					Overlay.show('err_mes',{
+						width:'auto',
+						height:'auto',
+						containerClass:"slide-up"
+					});
+				}
+			});
+		});
+	});
+	
+	function createCaretPlacer(atStart) {
+		return function(el) {
+			el.focus();
+			if (typeof window.getSelection != "undefined"
+					&& typeof document.createRange != "undefined") {
+				var range = document.createRange();
+				range.selectNodeContents(el);
+				range.collapse(atStart);
+				var sel = window.getSelection();
+				sel.removeAllRanges();
+				sel.addRange(range);
+			} else if (typeof document.body.createTextRange != "undefined") {
+				var textRange = document.body.createTextRange();
+				textRange.moveToElementText(el);
+				textRange.collapse(atStart);
+				textRange.select();
+			}
+		};
+	}
+	
+	$('.cedit').on('click', function(e){
+		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
+		//console.log($(this).attr('href'));
+		var input = $(this).parents('.comment').children('.samcom').attr('contenteditable','true');
+		input[0].style.backgroundColor = '#fdfbe7';
+		//input[0].style.whiteSpace = 'normal';
+		createCaretPlacer(input, false);
+		input.on('blur', function(e){
+			this.style.backgroundColor = 'initial';
+			this.style.whiteSpace = 'normal';
+			//console.log($(this).parents('.comment').children('.cedit').attr('href'));
+			var action = $(this).parents('.comment').children('.cedit').attr('href');
+			//console.log(this.innerHTML);
+			$(this).attr('contenteditable','false');
+			$.ajax.post(action, 'json=' + JSON.stringify({newcom: this.innerHTML}), function(status, data){
+				var answer = JSON.parse(data);
+				/*
+				if(answer['status'] == 'fail'){
+					document.getElementById('from_ajax_error').innerHTML = '<p>Не удалось изменить текст комментария! Причина неизвестна!</p>';
+					Overlay.show('err_mes',{
+						width:'auto',
+						height:'auto',
+						containerClass:"slide-up"
+					});
+				}
+				*/
+			});
+		});
+	});
+</script>
+{{/if_admin}}
+
+{{>ending}}

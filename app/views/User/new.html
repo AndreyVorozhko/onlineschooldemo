@@ -1,0 +1,38 @@
+{{>head}}
+
+</head>
+
+<body>
+    
+{{>header}}
+  {{>sidebar}}
+
+	{{>second-header}}
+	
+	<div class="wrapper">
+	
+		{{>breadcrumbs}}
+		
+		<div id="mob-title" class="block">
+			<h4>Новые события вашего обучения</h4>
+		</div>
+			
+		<div class="block block-group">
+		{{#events_list}}
+			<div class="event block paper">
+				<p><span class="date">{{adate}}</span><br>
+				Получен новый <a href="/user/area/cid/{{cid}}/lid/{{lid}}#id{{aid}}">ответ</a> куратора к <a href="/user/area/cid/{{cid}}/lid/{{lid}}">Уроку {{lpos}}. "{{lname}}"</a> курса <a href="">{{project}}</a></p>
+			</div>
+		{{/events_list}}
+		{{^events_list}}
+		<div class="event block paper">
+			<p>У вас пока нет новых событий, связанных с вашим обучением</p>
+		</div>
+		{{/events_list}}
+		
+		</div>
+	
+	</div>
+  {{>footer}}
+
+{{>ending}}

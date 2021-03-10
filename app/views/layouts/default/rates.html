@@ -1,0 +1,30 @@
+{{#avail}}
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+   <meta itemprop="price" content="{{price}}.00">
+   <meta itemprop="priceCurrency" content="RUB">
+   <link itemprop="availability" href="https://schema.org/LimitedAvailability">
+	
+    {{#action}}
+    <p class="rprice"><del>{{price}} ₽</del><br>
+	</p>
+    <span class="newprice">{{promoprice}} ₽</span>
+    <p class="discount">скидка: {{discount}}% <br>
+    выгода: {{profit}} ₽<br>
+    дней до окончания акции: {{action_days}}</p>
+    {{/action}}
+    {{^action}}
+    <p class="rprice">{{price}} ₽</p>
+    {{/action}}
+	
+	<p>Осталось мест: {{places}}</p>
+<!--<p><a href="#" class="pale_but">Оформить в рассрочку *</a></p>-->
+</div>
+<p><a href="#" class="bright_but">Оформить заказ</a></p>
+{{/avail}}
+{{^avail}}
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+   <meta itemprop="price" content="{{price}}.00">
+   <meta itemprop="priceCurrency" content="RUB">
+   <link itemprop="availability" href="https://schema.org/OutOfStock">
+</div><p style="color:red">Временно недоступен<br>для заказа</p>
+{{/avail}}

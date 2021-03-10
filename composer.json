@@ -1,0 +1,18 @@
+{
+	"require": {
+		"mustache/mustache": "~2.5",
+		"gabordemooij/redbean": "dev-master",
+		"phpmailer/phpmailer": "^6.1",
+		"vlucas/valitron": "^1.4",
+		"claviska/simpleimage": "^3.3",
+		"samdark/sitemap": "^2.2",
+		"avadim/qevix": "^1.1"
+	},
+    "autoload": {
+        "psr-4": {
+            "vorozhok\\": "vendor/vorozhok/core",
+            "app\\": "app",
+            "ext\\": "vendor/vorozhok/ext"
+        }
+    }
+}

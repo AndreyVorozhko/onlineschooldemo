@@ -1,0 +1,120 @@
+{{>head}}
+{{>header}}
+
+  {{>sidebar}}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Информация о пользователе</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+	  {{#info_list}}
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Карточка пользователя</h5>
+              </div>
+              <div class="card-body row">
+				<div class="image col-lg-6">
+					<img src="/upl/users/{{uid}}/ava.jpg" class="img-circle elevation-2 mb-4 w-100" style="max-width:240px;" alt="User Image">
+				</div>
+                <p class="card-text col-lg-6">
+					<b>Имя:</b> {{name}}<br>
+					<b>Фамилия:</b> {{surname}}<br>
+					<b>Роль:</b> {{role}}<br>
+					<b>Почта:</b> {{email}}<br>
+					<b>Телефон:</b> {{tel}}<br>
+					<b>WhatsApp:</b> {{{whats}}}<br>
+					<b>Viber:</b> {{{viber}}}<br>
+					<b>Telegram:</b> {{{teleg}}}<br>
+					<b>Забанен:</b> {{{banned}}}<br>
+					<b>Активирован:</b> {{{activated}}}<br>
+					<b>Новый:</b> {{{new}}}<br>
+				</p>
+				<a class="btn btn-info" href="users/edit/{{uid}}">Изменить</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Курсы пользователя</h5>
+              </div>
+              <div class="card-body">
+
+                <table id="article-list" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>course(project)</th>
+					<th>version</th>
+                    <th>status</th>
+					<th>rate</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+				  {{#access_list}}
+                  <tr>
+                    <td>{{id}}</td>
+					<td>{{project}}</td>
+					<td><a href="courses/view/{{vid}}">{{version}}</a></td>
+					<th>{{status}}</th>
+					<td>{{rate}} ({{price}} р.)</td>
+                  </tr>
+				  {{/access_list}}
+                  </tbody>
+                </table>
+				<a class="btn btn-info mt-4" href="users/add-access/{{uid}}">Добавить</a>
+              </div>
+            </div><!-- /.card -->
+          </div>
+          <!-- /.col-md-6 -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Что юзер написал о себе</h5>
+              </div>
+              <div class="card-body">
+
+                <p class="card-text">{{{about}}}</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Админские заметки о юзере</h5>
+              </div>
+              <div class="card-body">
+
+                <p class="card-text">{{{notes}}}</p>
+              </div>
+            </div>
+          </div>
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+		{{/info_list}}
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {{>control-sidebar}}
+
+{{>footer}}
+
+{{>ending}}

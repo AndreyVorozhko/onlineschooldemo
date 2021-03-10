@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/jquery.modal.css">
+	<link rel="stylesheet" href="css/popover.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div id="container">
+		<div class="razm" id="mstxt">Главный экран</div>
+		<div class="razm" id="mainscreen"></div>
+		<div class="razm del" id="half"></div>
+		<div class="razm descr half"><span class="f">1</span><span class="s">2</span></div>
+		<div class="razm del" id="quarter1"></div>
+		<div class="razm descr quarter1"><span class="f">1</span><span class="s">4</span></div>
+		<div class="razm del" id="quarter2"></div>
+		<div class="razm descr quarter2"><span class="f">3</span><span class="s">4</span></div>
+		<div class="razm del" id="third1"></div>
+		<div class="razm descr third1"><span class="f">1</span><span class="s">3</span></div>
+		<div class="razm del" id="third2"></div>
+		<div class="razm descr third2"><span class="f">2</span><span class="s">3</span></div>
+		<div class="razm del" id="fifth1"></div>
+		<div class="razm descr fifth1"><span class="f">1</span><span class="s">5</span></div>
+		<div class="razm del" id="fifth2"></div>
+		<div class="razm descr fifth2"><span class="f">2</span><span class="s">5</span></div>
+		<div class="razm del" id="fifth3"></div>
+		<div class="razm descr fifth3"><span class="f">3</span><span class="s">5</span></div>
+		<div class="razm del" id="fifth4"></div>
+		<div class="razm descr fifth4"><span class="f">4</span><span class="s">5</span></div>
+		<div class="razm del" id="sixt1"></div>
+		<div class="razm descr sixt1"><span class="f">1</span><span class="s">6</span></div>
+		<div class="razm del" id="sixt2"></div>
+		<div class="razm descr sixt2"><span class="f">2</span><span class="s">6</span></div>
+		<div class="razm del" id="sixt3"></div>
+		<div class="razm descr sixt3"><span class="f">3</span><span class="s">6</span></div>
+		<div class="razm del" id="sixt4"></div>
+		<div class="razm descr sixt4"><span class="f">4</span><span class="s">6</span></div>
+		<div class="razm del" id="sixt5"></div>
+		<div class="razm descr sixt5"><span class="f">5</span><span class="s">6</span></div>
+		<div class="corn-size conhandle iface"></div>
+	</div>
+	
+	<div id="mod1" class="modal">
+		<p><a href="#" rel="modal:close" class="addb" id="ntb">Блок</a></p>
+		<p><a href="#" rel="modal:close" class="addb" id="tb">Текст</a></p>
+		<p><a href="#" rel="modal:close" class="addb" id="pb">Картинка</a></p>
+	</div>
+	
+	<div id="mod2" class="modal">
+		<textarea name="" id="" cols="30" rows="10"></textarea>
+	</div>
+	
+	<div id="mod3" class="modal">
+		<input type='file' id="fileinput">
+		<a href="#mod3" class="addb" rel="modal:close" id="jsnsub">Submit</a>
+	</div>
+    
+    <div id="mod4" class="modal">
+        <p>Классический продающий шаблон</p>
+		<p><a href="#" class="addb examp" data-path="examples/classical_sale.json" id="examp1">Продающий</a></p>
+        <p>Шаблон нашего сайта (someproject.ru)</p>
+		<p><a href="#" class="addb examp" data-path="examples/someproject.ru.json" id="examp2">Концепция</a> <a href="http://someproject.ru" target="_blank" class="addb_link" id="site2">Реальный</a></p>
+        <p>Шаблон "Цветовой акцент"</p>
+		<p><a href="#" class="addb examp" data-path="examples/color-accent.json" id="examp3">Концепция</a> <a href="examples/color-accent/index.html" target="_blank" class="addb_link" id="site3">Реальный</a></p>
+        <p>Ультрасовременный шаблон</p>
+		<p><a href="#" class="addb examp" data-path="examples/ultramodern.json" id="examp4">Концепция</a> <a href="examples/ultramodern/index.html" target="_blank" class="addb_link" id="site4">Реальный</a></p>
+	</div>
+	
+	<div id="aside">
+	<h1>Концептер v1.0</h1>
+	<p>Скрыть панель - кнопка Insert на клавиатуре</p>
+	<a href="#mod1" rel="modal:open" class="addb">Новый блок</a>
+	<!--<a href="#" class="addb" id="clears">Clear storage</a>-->
+	<a href="#mod2" class="addb" id="gjsn">Сохранить</a>
+	<a href="#mod3" class="addb" rel="modal:open" id="ljsn">Загрузить</a>
+	<div><input type="checkbox" id="iface" class="switch" checked="false"> Интерфейс блоков</div>
+	<div><input type="checkbox" id="setka" class="switch" checked> Сетка</div>
+	<div><input type="checkbox" id="razdel" class="switch" checked> Разделители</div>
+    <p><a href="#mod4" rel="modal:open" class="addb" id="examples">Примеры</a></p>
+	</div>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.pep.js"></script>
+<script src="js/jquery-resizable.js"></script>
+<script src="js/vanilla-picker-mini.js"></script>
+<script src="js/jquery.modal.js"></script>
+<script src="js/popover.js"></script>
+<script src="js/conceptor.js"></script>
+
+</body>
+</html>

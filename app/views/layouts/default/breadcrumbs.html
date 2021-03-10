@@ -1,0 +1,18 @@
+<nav id="breadcrumbs">
+	<ul itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a itemprop="item" href="/"><span itemprop="name" class="hide">Главная </span><svg class="home"><use xlink:href="img/sprite.svg#homepage"></use></svg></a>
+			<meta itemprop="position" content="1" />
+		</li>
+		{{#breadcrumbs}}
+		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a itemprop="item" href="{{link}}" class="belem"><span itemprop="name">{{title}}</span></a>
+			<meta itemprop="position" content="{{pos}}" />
+		</li>
+		{{/breadcrumbs}}
+		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<span itemprop="name" id="not-active">{{title_not_active}}</span>
+			<meta itemprop="position" content="{{pos_not_active}}" />
+		</li>
+	</ul>
+</nav>

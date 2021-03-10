@@ -1,0 +1,129 @@
+{{>head}}
+{{>header}}
+
+  {{>sidebar}}
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Курсы на сайте</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+	  
+		<a class="btn btn-info .pb-3" href="/{{adminname}}/courses/add" style="margin-bottom:20px;">Новая версия курса</a>
+		
+		<p><div class="text-warning">Курсы - это на самом деле версии курсов. Чтобы создать новый курс - сначала <a href="courses/add-project">создайте проект</a></div></p>
+		
+        <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Все курсы</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="article-list" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>project name</th>
+                    <th>creation date</th>
+                    <th>status</th>
+                    <th>version</th>
+					<th>actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+				  {{#course_list}}
+                  <tr>
+                    <td>{{id}}</td>
+                    <td><a href="courses/view/{{id}}">{{project}}</a></td>
+                    <td>{{creation}}</td>
+                    <td>{{{status}}}</td>
+                    <td>{{version}}</td>
+                    <td>
+						<a href="{{index}}{{adminname}}/courses/view/{{id}}" target="_blank"><i class="far fa-eye"></i></a>
+						<a href="/{{adminname}}/courses/edit/{{id}}"><i class="far fa-edit"></i></a>
+						<a href="#"><i class="fas fa-clone"></i></i></a>
+					</td>
+                  </tr>
+				  {{/course_list}}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>id</th>
+                    <th>project name</th>
+                    <th>creation date</th>
+                    <th>status</th>
+                    <th>version</th>
+					<th>actions</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+      </div>
+	  <!-- /.container-fluid -->
+	  
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- /.wrapper -->
+
+  {{>control-sidebar}}
+  
+	<!-- Modal -->
+	<div class="modal fade" id="delconfirm">
+      <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:#000">Внимание!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>Удалить статью:<br>"<span id="artname"></span>"?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a id="yesdel" type="button" class="btn btn-outline-dark">Да</a>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Нет</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+{{>footer}}
+<script>
+	$('#delconfirm').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var artname = button.data('artname') // Extract info from data-* attributes
+	  var link = button.attr('href');
+	  
+	  var modal = $(this);
+	  modal.find('#artname').text(artname);
+	  modal.find('#yesdel').attr('href', link);
+	})
+
+  $(function () {
+    $('#article-list, #cat-list').DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+{{>ending}}

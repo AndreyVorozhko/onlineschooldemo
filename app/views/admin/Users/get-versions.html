@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax service page</title>
+</head>
+<body>
+	<select id="target">
+	{{#version_list}}
+		<option value="{{id}}">{{version}} (статус: {{status}})</option>
+	{{/version_list}}
+	</select>
+</body>
+</html>

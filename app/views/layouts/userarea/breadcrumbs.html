@@ -1,0 +1,13 @@
+		<div id="breadcrumbs" class="block"><div class="bread-inner with-shadow">
+			<ul id="breadcrumb">
+				<li>
+					<a class="bra" href="/user/area"><svg class="home"><use xlink:href="/assets/userarea/sprite.svg#homepage"></use></svg></a>
+				</li>
+				{{#breadcrumbs}}
+				<li>
+					<a class="bra" href="{{link}}">{{title}}</a>
+				</li>
+				{{/breadcrumbs}}
+				<li>{{title_not_active}}</li>
+			</ul>
+		</div></div>

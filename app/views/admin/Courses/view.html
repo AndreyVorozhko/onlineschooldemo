@@ -1,0 +1,217 @@
+{{>head}}
+{{>header}}
+
+  {{>sidebar}}
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Просмотр курса "{{cname}}"</h1>
+          </div><!-- /.col -->
+          {{>breadcrumbs}}
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+	  
+		<a class="btn btn-info .pb-3" href="/{{adminname}}/courses/addlesson/cid/{{id}}" style="margin-bottom:20px;">Новый урок</a>
+		<a class="btn btn-info .pb-3" href="/{{adminname}}/courses/addrate/cid/{{id}}" style="margin-bottom:20px;">Новый тариф</a>
+		
+        <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Список уроков курса "{{cname}}"</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="article-list" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>position</th>
+                    <th>name</th>
+                    <th>id</th>
+                    <th>stop</th>
+                    <th>rates</th>
+                    <th>bonus</th>
+					<th>actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+				  {{#lesson_list}}
+                  <tr>
+                    <td>{{position}}</td>
+                    <td>{{name}}</td>
+                    <td>{{lid}}</td>
+                    <td>{{stop}}</td>
+                    <td>{{rates}}</td>
+                    <td>{{bonus}}</td>
+                    <td>
+					<a href="{{index}}{{adminname}}/courses/lesson-view/{{lid}}" target="_blank"><i class="far fa-eye"></i></a>
+					<a href="/{{adminname}}/courses/lesson-edit/{{lid}}"><i class="far fa-edit"></i></a>
+					<a href="{{index}}{{adminname}}/courses/lesson-delete/{{lid}}" data-lessonname="{{name}}" data-toggle="modal" data-target="#lessondel"><i class="far fa-trash-alt"></i></a>
+					</td>
+                  </tr>
+				  {{/lesson_list}}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>position</th>
+                    <th>name</th>
+                    <th>id</th>
+                    <th>stop</th>
+                    <th>rates</th>
+                    <th>bonus</th>
+					<th>actions</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+		
+		<div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Список тарифов курса "{{cname}}"</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="article-list" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>price</th>
+                    <th>promodate (окончание акции)</th>
+                    <th>promoprice</th>
+                    <th>avail</th>
+                    <th>lim</th>
+                    <th>actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+				  {{#rate_list}}
+                  <tr>
+                    <td>{{rid}}</td>
+                    <td>{{rname}}</td>
+                    <td>{{price}}</td>
+                    <td>{{{promodate}}}</td>
+                    <td>{{promoprice}}</td>
+                    <td>{{{avail}}}</td>
+                    <td>{{lim}}</td>
+                    <td>
+					<a href="/{{adminname}}/courses/rate-edit/{{rid}}"><i class="far fa-edit"></i></a>
+					<a href="{{index}}{{adminname}}/courses/rate-delete/{{rid}}" data-ratename="{{rname}}" data-toggle="modal" data-target="#ratedel"><i class="far fa-trash-alt"></i></a>
+					</td>
+                  </tr>
+				  {{/rate_list}}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>price</th>
+                    <th>promodate (окончание акции)</th>
+                    <th>promoprice</th>
+                    <th>avail</th>
+                    <th>lim</th>
+                    <th>actions</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+	  <!-- /.container-fluid -->
+	  
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- /.wrapper -->
+
+	{{>control-sidebar}}
+  
+	<!-- Modal -->
+	<div class="modal fade" id="lessondel">
+      <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:#000">Внимание!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>Удалить урок:<br>"<span id="lessonname"></span>"?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a id="yesdellesson" type="button" class="btn btn-outline-dark">Да</a>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Нет</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+	<!-- Modal -->
+	<div class="modal fade" id="ratedel">
+      <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:#000">Внимание!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>Удалить тариф:<br>"<span id="ratename"></span>"?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a id="yesdelrate" type="button" class="btn btn-outline-dark">Да</a>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Нет</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+{{>footer}}
+<script>
+	$('#lessondel').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var lessonname = button.data('lessonname') // Extract info from data-* attributes
+	  var link = button.attr('href');
+	  
+	  var modal = $(this);
+	  modal.find('#lessonname').text(lessonname);
+	  modal.find('#yesdellesson').attr('href', link);
+	})
+	
+	$('#ratedel').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var ratename = button.data('ratename') // Extract info from data-* attributes
+	  var link = button.attr('href');
+	  
+	  var modal = $(this);
+	  modal.find('#ratename').text(ratename);
+	  modal.find('#yesdelrate').attr('href', link);
+	})
+
+  $(function () {
+    $('#article-list, #cat-list').DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+{{>ending}}
