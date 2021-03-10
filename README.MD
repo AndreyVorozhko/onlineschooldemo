@@ -13,6 +13,7 @@
 Данные для входа:
 
 Админка (http://`<yourdomain>`/admin): someproject@mail.ru:123456
+
 Кабинет пользователя(http://`<yourdomain>`/user/area): anton@mail.ru:123456
 
 Замечения по установке и настройке:
