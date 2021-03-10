@@ -12,8 +12,8 @@
 
 Данные для входа:
 
-Админка: someproject@mail.ru:123456
-Кабинет пользователя: anton@mail.ru:123456
+Админка (http://`<yourdomain>`/admin): someproject@mail.ru:123456
+Кабинет пользователя(http://`<yourdomain>`/user/area): anton@mail.ru:123456
 
 Замечения по установке и настройке:
 
